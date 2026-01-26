@@ -1,0 +1,135 @@
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-banner {
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    height: 450px;
+    border: 1px solid #eee;
+}
+
+.slides-viewport {
+    width: 100%;
+    height: 100%;
+}
+
+.slides-track {
+    display: flex;
+    height: 100%;
+    transition: transform 600ms ease-in-out;
+}
+
+.hero-link {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(26, 60, 90, 0.6);
+    color: #fff;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background 0.2s;
+    z-index: 10;
+
+    &:hover {
+        background: rgba(26, 60, 90, 0.9);
+    }
+}
+
+.nav-prev {
+    left: 20px;
+}
+
+.nav-next {
+    right: 20px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.active {
+        opacity: 1;
+        width: 30px;
+        border-radius: 5px;
+        background: #1d76bb;
+    }
+}
+
+.promo-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.promo-block {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+@media (max-width: 992px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-banner {
+        height: 350px;
+    }
+
+    .promo-column {
+        flex-direction: row;
+
+        .promo-block {
+            height: 150px;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-banner {
+        height: 250px;
+    }
+
+    .promo-column {
+        display: none;
+    }
+}
