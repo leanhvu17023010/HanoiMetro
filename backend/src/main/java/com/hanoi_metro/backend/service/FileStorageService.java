@@ -78,9 +78,9 @@ public class FileStorageService {
                 java.net.URI uri = java.net.URI.create(url);
                 String path = uri.getPath();
                 if (path != null && !path.isBlank()) {
-                    // Loại bỏ context path nếu có (ví dụ: /lumina_book)
-                    if (path.startsWith("/lumina_book")) {
-                        path = path.substring("/lumina_book".length());
+                    // Loại bỏ context path nếu có (ví dụ: /hanoi_metro)
+                    if (path.startsWith("/hanoi_metro")) {
+                        path = path.substring("/hanoi_metro".length());
                     }
                     // Tìm phần path sau /profile_media/
                     if (path.contains(PROFILE_MEDIA_URL)) {

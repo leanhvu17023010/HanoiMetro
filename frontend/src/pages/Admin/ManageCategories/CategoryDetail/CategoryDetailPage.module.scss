@@ -1,0 +1,64 @@
+.page {
+    padding: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #1d76bb;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.label {
+    font-weight: 600;
+    color: #666;
+}
+
+.name {
+    font-weight: 700;
+    color: #1d76bb;
+}
+
+.actions {
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+}
+
+.edit {
+    background: #1d76bb;
+}

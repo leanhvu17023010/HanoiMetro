@@ -45,7 +45,7 @@ jwt:
 app:
   default-avatar: "/assets/images/default-avatar.png"
   frontend:
-    base-url: "http://localhost:8080/lumina_book"
+    base-url: "http://localhost:8080/hanoi_metro"
 
 # GHN configuration
 ghn:
@@ -62,8 +62,8 @@ momo:
   partner-code: MOMOLRJZ20181206
   return-url: "http://localhost:3000/order-success"
   end-point: "https://test-payment.momo.vn/v2/gateway/api"
-  # Lưu ý: context-path của backend là /lumina_book nên IPN URL cần kèm context-path
-  ipn-url: "http://localhost:8080/lumina_book/api/momo/ipn-handler"
+  # Lưu ý: context-path của backend là /hanoi_metro nên IPN URL cần kèm context-path
+  ipn-url: "http://localhost:8080/hanoi_metro/api/momo/ipn-handler"
   access-key: "mTCKt9W3eU1m39TW"
   secret-key: "SetA5RDnLHvt51AULf51DyauxUo3kDU6"
   request-type: "captureWallet"

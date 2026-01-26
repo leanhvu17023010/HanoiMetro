@@ -3,13 +3,17 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const PrivateRoute = ({ children, requiredRole }) => {
-    const { token, userRole } = useAuth();
+    const { token, userRole, isLoading } = useAuth();
 
-    if (!token) {
-        return <Navigate to="/login" replace />;
+    if (isLoading) {
+        return null; // Or a loading spinner
     }
 
-    if (requiredRole && userRole !== requiredRole) {
+    if (!token) {
+        return <Navigate to="/" replace />;
+    }
+
+    if (requiredRole && userRole !== requiredRole && userRole !== 'ADMIN') {
         return <Navigate to="/" replace />;
     }
 

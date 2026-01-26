@@ -5,11 +5,11 @@
 -- by first updating existing data, then converting the column type
 --
 -- IMPORTANT: 
--- 1. Replace 'lumina_book' with your actual database name if different
+-- 1. Replace 'hanoi_metro' with your actual database name if different
 -- 2. Run this script in your MySQL database BEFORE starting the application
 -- 3. Make sure to backup your database before running this script
 
-USE lumina_book;
+USE hanoi_metro;
 
 -- Step 1: Check current data (for reference)
 -- Run this first to see what status values exist:

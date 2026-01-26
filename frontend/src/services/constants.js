@@ -3,7 +3,7 @@
 
 // =========== API Configuration ===========
 // API Base URL fallback - được cấu hình trong backend/application.yaml: app.frontend.base-url
-export const API_BASE_URL_FALLBACK = 'http://localhost:8080/lumina_book';
+export const API_BASE_URL_FALLBACK = 'http://localhost:8080/hanoi_metro';
 
 // =========== API Routes ===========
 export const API_ROUTES = {
@@ -153,7 +153,7 @@ export const GHN_DEFAULT_WEIGHT = 1200; // grams
 
 // Other constants
 export const GHN_REQUIRED_NOTE = 'CHOTHUHANG';
-export const GHN_CONTENT = 'Sách từ LuminaBook';
+export const GHN_CONTENT = 'Vé/Hàng từ Hanoi Metro';
 
 // =========== Product Constants ===========
 
@@ -263,8 +263,8 @@ export const DISCOUNT_VALUE_TYPES = [
 
 export const APPLY_SCOPE_OPTIONS = [
     { value: 'ORDER', label: 'Toàn bộ đơn hàng' },
-    { value: 'CATEGORY', label: 'Theo danh mục sách' },
-    { value: 'PRODUCT', label: 'Theo sách cụ thể' },
+    { value: 'CATEGORY', label: 'Theo danh mục' },
+    { value: 'PRODUCT', label: 'Theo Tuyến/Nhà ga cụ thể' },
 ];
 
 // =========== Initial Form State ===========

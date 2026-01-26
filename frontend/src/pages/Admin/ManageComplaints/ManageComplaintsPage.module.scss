@@ -1,0 +1,86 @@
+.admin-page {
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.table-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.complaint-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.complaint-table th {
+    background: #1d76bb;
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+}
+
+.complaint-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.content-cell {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.new {
+    background: #e65100;
+}
+
+.in_progress {
+    background: #1d76bb;
+}
+
+.resolved {
+    background: #2e7d32;
+}
+
+.escalated {
+    background: #d32f2f;
+}
+
+.view-btn {
+    padding: 6px 12px;
+    background: #e3f2fd;
+    color: #1d76bb;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.status {
+    padding: 50px;
+    text-align: center;
+}
+
+.error {
+    color: #d32f2f;
+}

@@ -1,0 +1,84 @@
+.page {
+    padding: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #1d76bb;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+    border-left: 4px solid #1d76bb;
+    padding-left: 10px;
+}
+
+.section p {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.items-table th {
+    background: #f8f9fa;
+    padding: 10px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.items-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.refund {
+    background: #7b1fa2;
+    color: #fff;
+}

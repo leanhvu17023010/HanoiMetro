@@ -1,5 +1,6 @@
 // Product utilities
 import { STATUS_MAP, STATUS_TO_CLASS } from './constants';
+import { getApiBaseUrl } from './utils';
 
 export const getProductImageUrl = (product) => {
     if (!product) return '';
@@ -17,11 +18,15 @@ export const getProductImageUrl = (product) => {
 export const normalizeMediaUrl = (url, apiBaseUrl) => {
     if (!url) return '';
     // Nếu URL đã là absolute, trả về như là
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('http')) return url;
+
+    const base = apiBaseUrl || (typeof getApiBaseUrl === 'function' ? getApiBaseUrl() : 'http://localhost:8080/metro/api/v1');
+
     // Nếu URL bắt đầu với /, thêm base URL
-    if (url.startsWith('/')) return `${apiBaseUrl}${url}`;
+    if (url.startsWith('/')) return `${base}${url}`;
+
     // Nếu không, giả sử URL là relative đến product_media
-    return `${apiBaseUrl}/product_media/${url}`;
+    return `${base}/product_media/${url}`;
 };
 
 // Lấy tên class của status

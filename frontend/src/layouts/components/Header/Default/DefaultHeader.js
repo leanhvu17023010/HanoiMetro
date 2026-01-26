@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './DefaultHeader.module.scss';
 import logoHanoiMetro from '../../../../assets/icons/logo_icon.png';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 const cx = classNames.bind(styles);
 
 function DefaultHeader() {
     const [isSticky, setIsSticky] = useState(false);
+    const { token, logout, openLoginModal } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,6 +24,15 @@ function DefaultHeader() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleAuthAction = () => {
+        if (token) {
+            logout();
+            navigate('/');
+        } else {
+            openLoginModal();
+        }
+    };
 
     return (
         <header className={cx('wrapper', { sticky: isSticky })}>
@@ -42,6 +54,9 @@ function DefaultHeader() {
                         </div>
                         <div className={cx('action-box')}>
                             <span className={cx('icon')}>🌐</span>
+                        </div>
+                        <div className={cx('action-box')} onClick={handleAuthAction} title={token ? 'Đăng xuất' : 'Đăng nhập'}>
+                            <span className={cx('icon')}>{token ? '🔓' : '👤'}</span>
                         </div>
                         <div className={cx('action-box')}>
                             <span className={cx('icon')}>≡</span>

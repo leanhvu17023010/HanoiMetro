@@ -1,0 +1,145 @@
+.page {
+    padding: 20px;
+}
+
+.title {
+    font-size: 20px;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    position: relative;
+}
+
+.tab.active {
+    color: #1d76bb;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #1d76bb;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 300px;
+}
+
+.add-btn {
+    padding: 8px 20px;
+    background: #1d76bb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.table-wrap {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        text-align: left;
+        padding: 15px;
+        background: #f8f9fa;
+        font-size: 13px;
+        color: #666;
+    }
+
+    td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+        color: #333;
+    }
+}
+
+.img-thumb {
+    width: 120px;
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.status-tag {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.active {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.inactive {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.action-btn {
+    background: #e3f2fd;
+    color: #1d76bb;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.del {
+    background: #fee2e2;
+    color: #d32f2f;
+}
+
+.status {
+    padding: 40px;
+    text-align: center;
+}

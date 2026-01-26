@@ -334,9 +334,9 @@ public class VoucherService {
                 java.net.URI uri = java.net.URI.create(url);
                 String path = uri.getPath();
                 if (path != null && !path.isBlank()) {
-                    // Loại bỏ context path nếu có (ví dụ: /lumina_book)
-                    if (path.startsWith("/lumina_book")) {
-                        path = path.substring("/lumina_book".length());
+                    // Loại bỏ context path nếu có (ví dụ: /hanoi_metro)
+                    if (path.startsWith("/hanoi_metro")) {
+                        path = path.substring("/hanoi_metro".length());
                     }
                     // Tìm phần path sau /voucher_media/ hoặc legacy /vouchers/
                     if (path.contains("/voucher_media/")) {
@@ -365,8 +365,8 @@ public class VoucherService {
                     } catch (Exception ignored) { }
                 }
                 // Loại bỏ context path nếu có
-                if (path.startsWith("/lumina_book")) {
-                    path = path.substring("/lumina_book".length());
+                if (path.startsWith("/hanoi_metro")) {
+                    path = path.substring("/hanoi_metro".length());
                 }
                 if (path.startsWith("/")) path = path.substring(1);
                 if (path.startsWith("uploads/vouchers/")) {

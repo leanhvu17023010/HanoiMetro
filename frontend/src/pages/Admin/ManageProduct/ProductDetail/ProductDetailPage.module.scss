@@ -1,0 +1,91 @@
+.page {
+    padding: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #1d76bb;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px;
+}
+
+.label {
+    font-weight: 600;
+    color: #666;
+}
+
+.name {
+    font-weight: 700;
+    color: #1d76bb;
+}
+
+.status {
+    font-weight: 700;
+
+    &.approved,
+    &.Đã\ duyệt {
+        color: #2e7d32;
+    }
+
+    &.pending,
+    &.Chờ\ duyệt {
+        color: #e65100;
+    }
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+}
+
+.approve {
+    background: #2e7d32;
+}
+
+.edit {
+    background: #1d76bb;
+}
+
+.delete {
+    background: #d32f2f;
+}

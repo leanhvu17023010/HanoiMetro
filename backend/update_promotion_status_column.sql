@@ -5,11 +5,11 @@
 -- by updating the status column to VARCHAR(50) to support new enum values like PENDING_APPROVAL
 
 -- IMPORTANT: 
--- 1. Replace 'lumina_book' with your actual database name if different
+-- 1. Replace 'hanoi_metro' with your actual database name if different
 -- 2. Run this script in your MySQL database
 -- 3. Restart your Spring Boot application after running this script
 
-USE lumina_book;
+USE hanoi_metro;
 
 -- Step 1: Check current column type (for reference)
 -- Run this first to see what type the column currently is:

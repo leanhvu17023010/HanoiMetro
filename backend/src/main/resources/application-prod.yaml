@@ -5,12 +5,12 @@
 server:
   port: 8080
   servlet:
-    context-path: /lumina_book
+    context-path: /hanoi_metro
 
 # Database Configuration - Production
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:lumina_book}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:hanoi_metro}
     driverClassName: com.mysql.cj.jdbc.Driver
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
@@ -42,7 +42,7 @@ app:
   default-avatar: "/assets/images/default-avatar.png"
   # Frontend API base URL - Thay đổi thành URL production của bạn
   frontend:
-    base-url: "https://api.yourdomain.com/lumina_book"  # ← THAY ĐỔI URL NÀY
+    base-url: "https://api.yourdomain.com/hanoi_metro"  # ← THAY ĐỔI URL NÀY
 
 # GHN configuration - Production
 ghn:

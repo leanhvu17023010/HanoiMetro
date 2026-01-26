@@ -31,8 +31,8 @@ export const normalizeVoucherImageUrl = (url, apiBaseUrl = null) => {
     if (url.startsWith('/')) {
         // Loại bỏ context path nếu có
         let cleanPath = url;
-        if (cleanPath.startsWith('/lumina_book')) {
-            cleanPath = cleanPath.substring('/lumina_book'.length);
+        if (cleanPath.startsWith('/hanoi_metro')) {
+            cleanPath = cleanPath.substring('/hanoi_metro'.length);
         }
 
         // Nếu đã có /voucher_media/ trong path, giữ nguyên

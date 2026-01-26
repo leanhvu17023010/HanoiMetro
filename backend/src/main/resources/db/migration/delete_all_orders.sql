@@ -1,8 +1,8 @@
 -- Script để xóa toàn bộ đơn hàng
--- Sử dụng database: lumina_book
+-- Sử dụng database: hanoi_metro
 -- LƯU Ý: Script này sẽ xóa TẤT CẢ đơn hàng và dữ liệu liên quan. Hãy cẩn thận!
 
-USE lumina_book;
+USE hanoi_metro;
 
 -- ============================================
 -- XÓA TOÀN BỘ ĐƠN HÀNG

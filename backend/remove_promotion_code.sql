@@ -1,7 +1,7 @@
 -- Script để xóa cột code khỏi bảng promotions và expired_promotions
 -- Chạy script này trong MySQL để cập nhật database schema
 
-USE lumina_book;
+USE hanoi_metro;
 
 -- Xóa cột code khỏi bảng promotions
 ALTER TABLE promotions DROP COLUMN IF EXISTS code;

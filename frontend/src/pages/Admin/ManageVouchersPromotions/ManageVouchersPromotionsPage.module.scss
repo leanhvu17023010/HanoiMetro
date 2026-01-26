@@ -1,0 +1,118 @@
+.admin-page {
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d76bb;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 300px;
+}
+
+.status-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.section h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    border-left: 4px solid #1d76bb;
+    padding-left: 10px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #f8f9fa;
+    color: #666;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.pending {
+    background: #e65100;
+}
+
+.approved {
+    background: #2e7d32;
+}
+
+.rejected {
+    background: #d32f2f;
+}
+
+.disabled {
+    background: #9e9e9e;
+}
+
+.expired {
+    background: #000;
+}
+
+.btn {
+    padding: 5px 10px;
+    background: #e3f2fd;
+    color: #1d76bb;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status {
+    padding: 40px;
+    text-align: center;
+}
+
+.error {
+    color: #d32f2f;
+}

@@ -1,10 +1,6 @@
-// useLocalStorage Hook
-// Lưu trữ dữ liệu trong localStorage
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function useLocalStorage(key, initialValue) {
-    // Lấy giá trị từ localStorage hoặc sử dụng initialValue
     const [storedValue, setStoredValue] = useState(() => {
         if (typeof window === 'undefined') {
             return initialValue;
@@ -18,13 +14,10 @@ function useLocalStorage(key, initialValue) {
         }
     });
 
-    // Hàm để set giá trị vào localStorage
     const setValue = (value) => {
         try {
-            // Cho phép value là function để update state
             const valueToStore = value instanceof Function ? value(storedValue) : value;
             setStoredValue(valueToStore);
-
             if (typeof window !== 'undefined') {
                 window.localStorage.setItem(key, JSON.stringify(valueToStore));
             }
@@ -33,7 +26,6 @@ function useLocalStorage(key, initialValue) {
         }
     };
 
-    // Hàm để xóa giá trị khỏi localStorage
     const removeValue = () => {
         try {
             setStoredValue(initialValue);
