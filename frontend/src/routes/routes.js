@@ -3,6 +3,8 @@ import Contact from '../pages/Contact';
 import CustomerService from '../pages/CustomerService';
 import SupportUserPage from '../pages/SupportUser';
 import MapPage from '../pages/Map/MapPage';
+import UserGuidePage from '../pages/UserGuide/UserGuidePage';
+import TicketInfoPage from '../pages/TicketInfo/TicketInfoPage';
 
 // Layouts
 import AdminLayout from '../layouts/AdminLayout';
@@ -48,6 +50,8 @@ const publicRoutes = [
     { path: '/news', component: NewsListPage },
     { path: '/news/:id', component: NewsDetailPage },
     { path: '/map', component: MapPage },
+    { path: '/metro-userguide', component: UserGuidePage },
+    { path: '/afc-tickets', component: TicketInfoPage },
 ];
 
 // Private routes

@@ -1,0 +1,478 @@
+.wrapper {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+.hero {
+    height: 400px;
+    background: linear-gradient(135deg, #170450 0%, #1d76bb 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding-top: 100px;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 4, 80, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+
+    h1 {
+        font-size: 56px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+        font-size: 20px;
+        opacity: 0.9;
+        font-weight: 300;
+    }
+}
+
+.container {
+    max-width: 1400px;
+    margin: -60px auto 100px;
+    padding: 0 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+}
+
+// Sidebar
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-item {
+    background: #fff;
+    border: none;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+
+    .nav-icon {
+        font-size: 24px;
+        color: #1d76bb;
+        transition: all 0.3s;
+    }
+
+    .nav-title {
+        flex: 1;
+        font-size: 17px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .nav-arrow {
+        color: #ccc;
+        font-size: 14px;
+        transition: transform 0.3s;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+        .nav-icon {
+            color: #170450;
+        }
+    }
+
+    &.active {
+        background-color: #1d76bb;
+
+        .nav-icon,
+        .nav-title,
+        .nav-arrow {
+            color: #fff;
+        }
+
+        .nav-arrow {
+            transform: rotate(90deg);
+        }
+    }
+}
+
+.contact-card {
+    background: linear-gradient(135deg, #1d76bb 0%, #170450 100%);
+    padding: 30px;
+    border-radius: 12px;
+    color: #fff;
+    margin-top: 20px;
+
+    h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+}
+
+.contact-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background: #fff;
+    color: #170450;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #f0f2f5;
+    }
+}
+
+// Main Content
+.content-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    min-height: 700px;
+}
+
+.section-content {
+    h2 {
+        font-size: 32px;
+        color: #170450;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #1d76bb;
+            border-radius: 2px;
+        }
+    }
+
+    .intro-text {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 40px;
+    }
+}
+
+// Rules Grid
+.rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.rule-card {
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-top: 4px solid #1d76bb;
+
+    .rule-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 18px;
+
+        .rule-icon {
+            color: #1d76bb;
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #333;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+
+            &::before {
+                content: '•';
+                color: #1d76bb;
+                position: absolute;
+                left: 0;
+                font-size: 20px;
+                top: -3px;
+            }
+        }
+    }
+}
+
+// Culture
+.culture-banner {
+    background: #e7f3ff;
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 6px solid #1d76bb;
+    margin-bottom: 40px;
+    font-style: italic;
+    font-size: 20px;
+    color: #170450;
+    font-weight: 500;
+}
+
+.culture-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.culture-item {
+    display: flex;
+    gap: 25px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    transition: all 0.3s;
+
+    &:hover {
+        border-color: #1d76bb;
+        background: #fafafa;
+    }
+
+    .item-num {
+        font-size: 36px;
+        font-weight: 900;
+        color: rgba(29, 118, 187, 0.2);
+    }
+
+    h4 {
+        font-size: 19px;
+        color: #170450;
+        margin-bottom: 8px;
+    }
+
+    p {
+        color: #666;
+        line-height: 1.6;
+        font-size: 15px;
+    }
+}
+
+// Guide Steps
+.guide-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.step-card {
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+
+    .step-icon {
+        width: 80px;
+        height: 80px;
+        background: #e7f3ff;
+        color: #1d76bb;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: #170450;
+    }
+
+    p {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+    }
+}
+
+.step-arrow {
+    color: #ddd;
+    font-size: 24px;
+}
+
+.usage-tips {
+    .tip-box {
+        display: flex;
+        gap: 20px;
+        padding: 30px;
+        background: #fff8eb;
+        border: 1px solid #ffe4b5;
+        border-radius: 12px;
+
+        .tip-icon {
+            font-size: 28px;
+            color: #f6ad55;
+        }
+
+        h4 {
+            margin-bottom: 8px;
+            color: #856404;
+        }
+
+        p {
+            color: #856404;
+            font-size: 15px;
+            margin: 0;
+        }
+    }
+}
+
+// Benefits
+.benefits-split {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.benefit-group {
+    .group-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+
+        svg {
+            font-size: 32px;
+            color: #38a169;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #2f855a;
+            margin: 0;
+        }
+
+        &:last-child svg {
+            color: #1d76bb;
+        }
+
+        &:last-child h3 {
+            color: #1d76bb;
+        }
+    }
+
+    .benefit-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+
+        span {
+            padding: 6px 15px;
+            background: #e6fffa;
+            color: #2c7a7b;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.8;
+    }
+}
+
+@media (max-width: 1200px) {
+    .layout {
+        grid-template-columns: 300px 1fr;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .nav-item {
+        width: calc(50% - 8px);
+    }
+
+    .content-card {
+        padding: 30px;
+    }
+
+    .rules-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-item {
+        width: 100%;
+    }
+
+    .guide-steps {
+        flex-direction: column;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 20px 0;
+    }
+
+    .hero {
+        height: 300px;
+    }
+}

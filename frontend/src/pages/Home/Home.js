@@ -47,8 +47,8 @@ function Home() {
 
     const navItems = [
         { title: 'Bản đồ Metro', icon: '🗺️', color: '#1d76bb', path: '/map' },
-        { title: 'Hướng dẫn sử dụng', icon: '📖', color: '#2c7a7b', path: '/support' },
-        { title: 'Thông tin vé', icon: '🎟️', color: '#744210', path: '/support' },
+        { title: 'Hướng dẫn sử dụng', icon: '📖', color: '#2c7a7b', path: '/metro-userguide' },
+        { title: 'Thông tin vé', icon: '🎟️', color: '#744210', path: '/afc-tickets' },
         { title: 'Giới thiệu công ty', icon: '🏢', color: '#170450', path: '/about' },
         { title: 'Tin tức & Thông báo', icon: '📰', color: '#1d76bb', path: '/news' }
     ];
