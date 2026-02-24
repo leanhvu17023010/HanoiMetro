@@ -2,6 +2,7 @@ import Home from '../pages/Home';
 import Contact from '../pages/Contact';
 import CustomerService from '../pages/CustomerService';
 import SupportUserPage from '../pages/SupportUser';
+import MapPage from '../pages/Map/MapPage';
 
 // Layouts
 import AdminLayout from '../layouts/AdminLayout';
@@ -46,6 +47,7 @@ const publicRoutes = [
     { path: '/support/user', component: SupportUserPage },
     { path: '/news', component: NewsListPage },
     { path: '/news/:id', component: NewsDetailPage },
+    { path: '/map', component: MapPage },
 ];
 
 // Private routes
