@@ -22,36 +22,38 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
     // API không cần xác thực (ai cũng có thể gọi được).
     private static final String[] PUBLIC_POST_ENDPOINTS = {
-        "/users",
-        "/auth/token",
-        "/auth/introspect",
-        "/auth/logout",
-        "/auth/refresh",
-        "/auth/send-otp",
-        "/auth/verify-otp",
-        "/auth/reset-password",
-        "/shipments/ghn/fees",
-        "/api/momo/ipn-handler"
+            "/users",
+            "/auth/token",
+            "/auth/introspect",
+            "/auth/logout",
+            "/auth/refresh",
+            "/auth/send-otp",
+            "/auth/verify-otp",
+            "/auth/reset-password",
+            "/shipments/ghn/fees",
+            "/api/momo/ipn-handler"
     };
 
     private static final String[] PUBLIC_GET_ENDPOINTS = {
-        "/product_media/**",
-        "/voucher_media/**",
-        "/promotion_media/**",
-        "/profile_media/**",
-        "/reviews/**",
-        "/categories/**",
-        "/vouchers/**",
-        "/promotions/**",
-        "/products/**",
-        "/uploads/**",
-        "/assets/**",
-        "/static/**",
-        "/banners/active",
-        "/ghn/provinces",
-        "/ghn/districts",
-        "/ghn/wards",
-        "/error"  // Allow error endpoint to be accessed without authentication
+            "/product_media/**",
+            "/voucher_media/**",
+            "/promotion_media/**",
+            "/profile_media/**",
+            "/reviews/**",
+            "/categories/**",
+            "/vouchers/**",
+            "/promotions/**",
+            "/products/**",
+            "/uploads/**",
+            "/assets/**",
+            "/static/**",
+            "/banners/active",
+            "/news/active",
+            "/banner_media/**",
+            "/news_media/**",
+            "/ghn/provinces",
+            "/ghn/districts",
+            "/ghn/wards"
     };
 
     private final CustomJwtDecoder customJwtDecoder;
@@ -64,30 +66,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request -> request
-                .requestMatchers(HttpMethod.GET,PUBLIC_GET_ENDPOINTS).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_GET_ENDPOINTS).permitAll()
                 .requestMatchers(HttpMethod.POST, PUBLIC_POST_ENDPOINTS).permitAll()
+                .requestMatchers("/error").permitAll() // Allow all methods on /error
                 .anyRequest()
                 .authenticated()); // Tất cả request khác đề buộc phải có JWT hợp lệ
 
         // Bật chế độ resource server theo chuẩn OAuth2, xác thực request bằng JWT
         httpSecurity.oauth2ResourceServer(
                 oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer
-                                .decoder(customJwtDecoder) // Dùng jwtDecoder để giải mã và xác minh token
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        .decoder(customJwtDecoder) // Dùng jwtDecoder để giải mã và xác minh token
+                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(
                                 new JwtAuthenticationEntryPoint()) // Điều hướng user sau khi authentication fail
-                );
+        );
 
         httpSecurity.csrf(
-                AbstractHttpConfigurer
-                        ::disable); // Tắt CSRF, thường làm với REST API vì không cần bảo vệ form như web app
+                AbstractHttpConfigurer::disable); // Tắt CSRF, thường làm với REST API vì không cần bảo vệ form như web
+                                                  // app
 
         return httpSecurity.build();
     }
 
     // Cấu hình CORS cho API
     @Bean
-    public CorsFilter corsFilter() { 
+    public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
         // Cấu hình core

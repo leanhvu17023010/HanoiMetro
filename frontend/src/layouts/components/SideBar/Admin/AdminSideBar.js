@@ -44,55 +44,22 @@ export default function AdminSideBar() {
                 <ul className={cx('menu')}>
                     <li>
                         <NavLink
-                            to="/admin"
-                            end
+                            to="/admin/content?tab=banner"
                             className={({ isActive }) =>
-                                cx('link', {
-                                    active: isActive || isStaffManagementActive,
-                                })
+                                cx('link', { active: isActive && location.search.includes('tab=banner') })
                             }
                         >
-                            Quản lý Nhân viên
+                            Quản lý Banner
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="/admin/customer-accounts"
-                            className={({ isActive }) => cx('link', { active: isActive })}
+                            to="/admin/content?tab=news"
+                            className={({ isActive }) =>
+                                cx('link', { active: isActive && (location.search.includes('tab=news') || !location.search) })
+                            }
                         >
-                            Quản lý Khách hàng
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/products"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Quản lý Tuyến/Nhà ga
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/categories"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Quản lý Danh mục
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/orders"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Quản lý Vé/Đơn hàng
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/vouchers-promotions"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Quản lý Ưu đãi
+                            Quản lý Tin tức
                         </NavLink>
                     </li>
                     <li>
@@ -101,22 +68,6 @@ export default function AdminSideBar() {
                             className={({ isActive }) => cx('link', { active: isActive })}
                         >
                             Quản lý Khiếu nại
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/content"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Quản lý Tin tức
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/admin/reports"
-                            className={({ isActive }) => cx('link', { active: isActive })}
-                        >
-                            Báo cáo thống kê
                         </NavLink>
                     </li>
                     <li>

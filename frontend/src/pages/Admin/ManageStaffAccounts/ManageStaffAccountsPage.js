@@ -5,7 +5,7 @@ import styles from './ManageStaffAccountsPage.module.scss';
 import SearchAndSort from '../../../components/Common/SearchAndSort';
 import ConfirmDialog from '../../../components/Common/ConfirmDialog/DeleteAccountDialog';
 import Notification from '../../../components/Common/Notification/Notification';
-import { getAllUsers, updateUser, deleteUser } from '../../../services';
+import { getAllUsers, updateUser, deleteUser, getStoredToken } from '../../../services';
 
 const cx = classNames.bind(styles);
 
@@ -30,7 +30,7 @@ function ManageStaffAccountsPage() {
         setLoading(true);
         setError(null);
         try {
-            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            const token = getStoredToken();
             if (!token) {
                 setError('Vui lòng đăng nhập để tiếp tục');
                 setLoading(false);
@@ -38,10 +38,12 @@ function ManageStaffAccountsPage() {
             }
 
             const users = await getAllUsers(token);
+            console.log('Fetched all users:', users);
             const employees = (users || [])
                 .filter(user => {
                     const roleName = user?.role?.name || user?.role;
-                    return roleName === 'STAFF' || roleName === 'CUSTOMER_SUPPORT';
+                    console.log(`Checking user: ${user.email}, role: ${roleName}`);
+                    return roleName === 'STAFF' || roleName === 'CUSTOMER_SUPPORT' || roleName === 'ADMIN';
                 })
                 .map(user => {
                     const fullName = user.fullName || user.full_name || '';
@@ -104,7 +106,7 @@ function ManageStaffAccountsPage() {
             message: `Bạn có chắc chắn muốn ${action} tài khoản này?`,
             onConfirm: async () => {
                 try {
-                    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+                    const token = getStoredToken();
                     await updateUser(employeeId, { isActive: !isCurrentlyActive }, token);
                     setNotif({ open: true, type: 'success', title: 'Thành công', message: `Đã ${action} thành công`, duration: 3000 });
                     fetchStaff();

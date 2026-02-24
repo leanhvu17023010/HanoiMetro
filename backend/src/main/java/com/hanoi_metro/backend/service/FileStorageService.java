@@ -21,12 +21,17 @@ public class FileStorageService {
     private static final String VOUCHER_MEDIA_DIR = "uploads/vouchers";
     private static final String PROMOTION_MEDIA_DIR = "uploads/promotions";
     private static final String PROFILE_MEDIA_DIR = "uploads/profile_media";
+    private static final String NEWS_MEDIA_DIR = "uploads/news";
+    private static final String BANNER_MEDIA_DIR = "uploads/banners";
     private static final String VOUCHER_MEDIA_URL = "/voucher_media/";
     private static final String PROMOTION_MEDIA_URL = "/promotion_media/";
     private static final String PROFILE_MEDIA_URL = "/profile_media/";
+    private static final String NEWS_MEDIA_URL = "/news_media/";
+    private static final String BANNER_MEDIA_URL = "/banner_media/";
 
     /**
      * Lưu file media của product vào thư mục product_media/
+     * 
      * @param file File cần lưu
      * @return URL của file đã lưu
      */
@@ -36,6 +41,7 @@ public class FileStorageService {
 
     /**
      * Lưu file media của voucher vào thư mục vouchers/
+     * 
      * @param file File cần lưu
      * @return URL của file đã lưu
      */
@@ -45,6 +51,7 @@ public class FileStorageService {
 
     /**
      * Lưu file media của promotion vào thư mục promotions/
+     * 
      * @param file File cần lưu
      * @return URL của file đã lưu
      */
@@ -54,6 +61,7 @@ public class FileStorageService {
 
     /**
      * Lưu file avatar/profile vào thư mục profile_media/
+     * 
      * @param file File cần lưu
      * @return URL của file đã lưu
      */
@@ -62,17 +70,38 @@ public class FileStorageService {
     }
 
     /**
+     * Lưu file media của tin tức vào thư mục news/
+     * 
+     * @param file File cần lưu
+     * @return URL của file đã lưu
+     */
+    public String storeNewsMedia(MultipartFile file) {
+        return storeFile(file, NEWS_MEDIA_DIR, NEWS_MEDIA_URL);
+    }
+
+    /**
+     * Lưu file media của banner vào thư mục banners/
+     * 
+     * @param file File cần lưu
+     * @return URL của file đã lưu
+     */
+    public String storeBannerMedia(MultipartFile file) {
+        return storeFile(file, BANNER_MEDIA_DIR, BANNER_MEDIA_URL);
+    }
+
+    /**
      * Xóa file avatar/profile dựa trên URL
+     * 
      * @param url URL của file cần xóa
      */
     public void deleteProfileMedia(String url) {
         if (url == null || url.isBlank()) {
             return;
         }
-        
+
         try {
             String filename = null;
-            
+
             // Parse URL để lấy filename
             try {
                 java.net.URI uri = java.net.URI.create(url);
@@ -114,7 +143,8 @@ public class FileStorageService {
                 }
             }
 
-            // Nếu vẫn không có filename, và URL không chứa "/", coi như URL chính là filename
+            // Nếu vẫn không có filename, và URL không chứa "/", coi như URL chính là
+            // filename
             if ((filename == null || filename.isBlank()) && !url.contains("/")) {
                 filename = url;
             }
@@ -147,9 +177,10 @@ public class FileStorageService {
 
     /**
      * Lưu file vào thư mục chỉ định
-     * @param file File cần lưu
+     * 
+     * @param file      File cần lưu
      * @param directory Thư mục đích
-     * @param urlPath Đường dẫn URL để truy cập file
+     * @param urlPath   Đường dẫn URL để truy cập file
      * @return URL của file đã lưu
      */
     private String storeFile(MultipartFile file, String directory, String urlPath) {
@@ -181,5 +212,3 @@ public class FileStorageService {
         }
     }
 }
-
-

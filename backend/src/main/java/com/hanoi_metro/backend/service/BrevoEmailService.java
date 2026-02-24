@@ -34,8 +34,8 @@ public class BrevoEmailService {
         this.senderEmail = senderEmail;
     }
 
-    private static final String BREVO_API_URL =
-            "https://api.brevo.com/v3/smtp/email"; // correct Brevo transactional email endpoint
+    private static final String BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"; // correct Brevo transactional
+                                                                                       // email endpoint
 
     public void sendOtpEmail(String toEmail, String otpCode) {
         try {
@@ -46,16 +46,16 @@ public class BrevoEmailService {
 
             // Prepare request body
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", "User")});
-            requestBody.put("subject", "Mã xác thực OTP - LuminaBook");
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", "User") });
+            requestBody.put("subject", "Mã xác thực OTP - Hanoi Metro");
 
             String emailContent = String.format(
                     "Xin chào,\n\n" + "Mã xác thực OTP của bạn là: %s\n\n"
                             + "Mã này có hiệu lực trong 5 phút.\n"
                             + "Vui lòng không chia sẻ mã này với bất kỳ ai.\n\n"
                             + "Trân trọng,\n"
-                            + "Đội ngũ LuminaBook",
+                            + "Đội ngũ Hanoi Metro",
                     otpCode);
 
             requestBody.put("textContent", emailContent);
@@ -87,13 +87,13 @@ public class BrevoEmailService {
 
             // Prepare request body
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook Admin"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", staffName)});
-            requestBody.put("subject", "Thông tin tài khoản nhân viên - LuminaBook");
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro Admin"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", staffName) });
+            requestBody.put("subject", "Thông tin tài khoản nhân viên - Hanoi Metro");
 
             String emailContent = String.format(
                     "Xin chào %s,\n\n"
-                            + "Chào mừng bạn đến với đội ngũ LuminaBook!\n\n"
+                            + "Chào mừng bạn đến với đội ngũ Hanoi Metro!\n\n"
                             + "Thông tin tài khoản của bạn:\n"
                             + "- Email: %s\n"
                             + "- Mật khẩu: %s\n"
@@ -102,7 +102,7 @@ public class BrevoEmailService {
                             + "Địa chỉ đăng nhập: http://localhost:3000\n\n"
                             + "Lưu ý: Vui lòng không chia sẻ thông tin này với bất kỳ ai.\n\n"
                             + "Trân trọng,\n"
-                            + "Đội ngũ LuminaBook",
+                            + "Đội ngũ Hanoi Metro",
                     staffName, toEmail, password, role);
 
             requestBody.put("textContent", emailContent);
@@ -135,9 +135,10 @@ public class BrevoEmailService {
 
             // Prepare request body
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook Admin"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", userName != null ? userName : "User")});
-            requestBody.put("subject", "Thông báo: Tài khoản của bạn đã bị khóa - LuminaBook");
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro Admin"));
+            requestBody.put("to",
+                    new Object[] { Map.of("email", toEmail, "name", userName != null ? userName : "User") });
+            requestBody.put("subject", "Thông báo: Tài khoản của bạn đã bị khóa - Hanoi Metro");
 
             String roleDisplayName = "Khách hàng";
             if (roleName != null) {
@@ -157,7 +158,7 @@ public class BrevoEmailService {
 
             String emailContent = String.format(
                     "Xin chào %s,\n\n"
-                            + "Chúng tôi xin thông báo rằng tài khoản %s của bạn tại LuminaBook đã bị khóa.\n\n"
+                            + "Chúng tôi xin thông báo rằng tài khoản %s của bạn tại Hanoi Metro đã bị khóa.\n\n"
                             + "Thông tin tài khoản:\n"
                             + "- Email: %s\n"
                             + "- Vai trò: %s\n\n"
@@ -167,7 +168,7 @@ public class BrevoEmailService {
                             + "- Hoặc liên hệ qua hotline:  \n\n"
                             + "Chúng tôi sẽ xem xét và phản hồi yêu cầu của bạn trong thời gian sớm nhất.\n\n"
                             + "Trân trọng,\n"
-                            + "Đội ngũ LuminaBook",
+                            + "Đội ngũ Hanoi Metro",
                     userName != null ? userName : "Quý khách", roleDisplayName, toEmail, roleDisplayName, senderEmail);
 
             requestBody.put("textContent", emailContent);
@@ -201,9 +202,10 @@ public class BrevoEmailService {
 
             // Prepare request body
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook Admin"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", userName != null ? userName : "User")});
-            requestBody.put("subject", "Thông báo: Tài khoản của bạn đã được mở khóa - LuminaBook");
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro Admin"));
+            requestBody.put("to",
+                    new Object[] { Map.of("email", toEmail, "name", userName != null ? userName : "User") });
+            requestBody.put("subject", "Thông báo: Tài khoản của bạn đã được mở khóa - Hanoi Metro");
 
             String roleDisplayName = "Khách hàng";
             if (roleName != null) {
@@ -223,7 +225,7 @@ public class BrevoEmailService {
 
             String emailContent = String.format(
                     "Xin chào %s,\n\n"
-                            + "Chúng tôi xin thông báo rằng tài khoản %s của bạn tại LuminaBook đã được mở khóa.\n\n"
+                            + "Chúng tôi xin thông báo rằng tài khoản %s của bạn tại Hanoi Metro đã được mở khóa.\n\n"
                             + "Thông tin tài khoản:\n"
                             + "- Email: %s\n"
                             + "- Vai trò: %s\n\n"
@@ -231,9 +233,9 @@ public class BrevoEmailService {
                             + "Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi:\n"
                             + "- Email hỗ trợ: %s\n"
                             + "- Hoặc liên hệ qua hotline:  \n\n"
-                            + "Cảm ơn bạn đã sử dụng dịch vụ của LuminaBook.\n\n"
+                            + "Cảm ơn bạn đã sử dụng dịch vụ của Hanoi Metro.\n\n"
                             + "Trân trọng,\n"
-                            + "Đội ngũ LuminaBook",
+                            + "Đội ngũ Hanoi Metro",
                     userName != null ? userName : "Quý khách", roleDisplayName, toEmail, roleDisplayName, senderEmail);
 
             requestBody.put("textContent", emailContent);
@@ -252,8 +254,10 @@ public class BrevoEmailService {
 
         } catch (Exception e) {
             log.error(
-                    "Failed to send account unlocked email via Brevo API to: {} - Error: {}", toEmail, e.getMessage(), e);
-            // Don't throw exception here - account unlock should succeed even if email fails
+                    "Failed to send account unlocked email via Brevo API to: {} - Error: {}", toEmail, e.getMessage(),
+                    e);
+            // Don't throw exception here - account unlock should succeed even if email
+            // fails
             // Just log the error
         }
     }
@@ -281,21 +285,23 @@ public class BrevoEmailService {
             if (order.getItems() != null && !order.getItems().isEmpty()) {
                 for (OrderItem item : order.getItems()) {
                     String name = item.getProduct() != null ? item.getProduct().getName() : "Sản phẩm";
-                    String itemText = String.format("- %s x%d : %s\n", 
+                    String itemText = String.format("- %s x%d : %s\n",
                             name, item.getQuantity(), currencyFormat.format(item.getFinalPrice()));
                     itemsTextBuilder.append(itemText);
-                    
+
                     String itemHtml = String.format(
                             "<tr><td style='padding: 8px; border-bottom: 1px solid #eee;'>%s</td>" +
-                            "<td style='padding: 8px; border-bottom: 1px solid #eee; text-align: center;'>x%d</td>" +
-                            "<td style='padding: 8px; border-bottom: 1px solid #eee; text-align: right;'>%s</td></tr>",
+                                    "<td style='padding: 8px; border-bottom: 1px solid #eee; text-align: center;'>x%d</td>"
+                                    +
+                                    "<td style='padding: 8px; border-bottom: 1px solid #eee; text-align: right;'>%s</td></tr>",
                             name, item.getQuantity(), currencyFormat.format(item.getFinalPrice()));
                     itemsHtmlBuilder.append(itemHtml);
                 }
             } else {
                 // Nếu không có items, vẫn gửi email nhưng với thông báo
                 itemsTextBuilder.append("Không có sản phẩm trong đơn hàng.\n");
-                itemsHtmlBuilder.append("<tr><td colspan='3' style='padding: 8px; text-align: center; color: #999;'>Không có sản phẩm trong đơn hàng.</td></tr>");
+                itemsHtmlBuilder.append(
+                        "<tr><td colspan='3' style='padding: 8px; text-align: center; color: #999;'>Không có sản phẩm trong đơn hàng.</td></tr>");
             }
 
             // Parse shipping address
@@ -331,7 +337,7 @@ public class BrevoEmailService {
             // Text content
             String textContent = String.format(
                     "Xin chào %s,\n\n"
-                            + "Cảm ơn bạn đã đặt hàng tại LuminaBook!\n\n"
+                            + "Cảm ơn bạn đã đặt hàng tại Hanoi Metro!\n\n"
                             + "Đơn hàng %s của bạn đã được xác nhận thành công.\n\n"
                             + "THÔNG TIN ĐƠN HÀNG:\n"
                             + "Mã đơn hàng: %s\n"
@@ -343,7 +349,7 @@ public class BrevoEmailService {
                             + "ĐỊA CHỈ GIAO HÀNG:\n%s\n\n"
                             + "Chúng tôi sẽ liên hệ với bạn khi đơn hàng được giao cho đơn vị vận chuyển.\n"
                             + "Bạn có thể theo dõi trạng thái đơn hàng tại: http://localhost:3000/customer-account/orders\n\n"
-                            + "Trân trọng,\nĐội ngũ LuminaBook",
+                            + "Trân trọng,\nĐội ngũ Hanoi Metro",
                     customerName,
                     order.getCode(),
                     order.getCode(),
@@ -357,51 +363,58 @@ public class BrevoEmailService {
             // HTML content
             String htmlContent = String.format(
                     "<!DOCTYPE html>" +
-                    "<html><head><meta charset='UTF-8'><style>" +
-                    "body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }" +
-                    ".container { max-width: 600px; margin: 0 auto; padding: 20px; }" +
-                    ".header { background-color: #1A3C5A; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }" +
-                    ".content { background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; }" +
-                    ".order-info { background-color: white; padding: 15px; margin: 15px 0; border-radius: 5px; }" +
-                    ".order-info h3 { margin-top: 0; color: #1A3C5A; }" +
-                    ".items-table { width: 100%%; border-collapse: collapse; margin: 15px 0; background-color: white; }" +
-                    ".items-table th { background-color: #1A3C5A; color: white; padding: 10px; text-align: left; }" +
-                    ".items-table td { padding: 8px; border-bottom: 1px solid #eee; }" +
-                    ".total-row { font-weight: bold; font-size: 18px; color: #1A3C5A; }" +
-                    ".footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }" +
-                    "</style></head><body>" +
-                    "<div class='container'>" +
-                    "<div class='header'><h1>Xác nhận đơn hàng</h1></div>" +
-                    "<div class='content'>" +
-                    "<p>Xin chào <strong>%s</strong>,</p>" +
-                    "<p>Cảm ơn bạn đã đặt hàng tại <strong>LuminaBook</strong>!</p>" +
-                    "<div class='order-info'>" +
-                    "<h3>Thông tin đơn hàng</h3>" +
-                    "<p><strong>Mã đơn hàng:</strong> %s</p>" +
-                    "<p><strong>Ngày đặt:</strong> %s</p>" +
-                    "<p><strong>Phương thức thanh toán:</strong> %s</p>" +
-                    "</div>" +
-                    "<h3>Chi tiết sản phẩm</h3>" +
-                    "<table class='items-table'>" +
-                    "<thead><tr><th>Sản phẩm</th><th style='text-align: center;'>Số lượng</th><th style='text-align: right;'>Thành tiền</th></tr></thead>" +
-                    "<tbody>%s</tbody>" +
-                    "<tfoot>" +
-                    "<tr><td colspan='2' style='text-align: right; padding-top: 10px;'><strong>Phí vận chuyển:</strong></td>" +
-                    "<td style='text-align: right; padding-top: 10px;'>%s</td></tr>" +
-                    "<tr class='total-row'><td colspan='2' style='text-align: right; padding-top: 10px;'><strong>Tổng cộng:</strong></td>" +
-                    "<td style='text-align: right; padding-top: 10px;'>%s</td></tr>" +
-                    "</tfoot></table>" +
-                    "<div class='order-info'>" +
-                    "<h3>Địa chỉ giao hàng</h3>" +
-                    "<p style='white-space: pre-line;'>%s</p>" +
-                    "</div>" +
-                    "<p>Chúng tôi sẽ liên hệ với bạn khi đơn hàng được giao cho đơn vị vận chuyển.</p>" +
-                    "<p>Bạn có thể theo dõi trạng thái đơn hàng tại: " +
-                    "<a href='http://localhost:3000/customer-account/orders'>Xem đơn hàng của tôi</a></p>" +
-                    "</div>" +
-                    "<div class='footer'>" +
-                    "<p>Trân trọng,<br>Đội ngũ LuminaBook</p>" +
-                    "</div></div></body></html>",
+                            "<html><head><meta charset='UTF-8'><style>" +
+                            "body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }" +
+                            ".container { max-width: 600px; margin: 0 auto; padding: 20px; }" +
+                            ".header { background-color: #1A3C5A; color: white; padding: 20px; text-align: center; border-radius: 5px 5px 0 0; }"
+                            +
+                            ".content { background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; }" +
+                            ".order-info { background-color: white; padding: 15px; margin: 15px 0; border-radius: 5px; }"
+                            +
+                            ".order-info h3 { margin-top: 0; color: #1A3C5A; }" +
+                            ".items-table { width: 100%%; border-collapse: collapse; margin: 15px 0; background-color: white; }"
+                            +
+                            ".items-table th { background-color: #1A3C5A; color: white; padding: 10px; text-align: left; }"
+                            +
+                            ".items-table td { padding: 8px; border-bottom: 1px solid #eee; }" +
+                            ".total-row { font-weight: bold; font-size: 18px; color: #1A3C5A; }" +
+                            ".footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }" +
+                            "</style></head><body>" +
+                            "<div class='container'>" +
+                            "<div class='header'><h1>Xác nhận đơn hàng</h1></div>" +
+                            "<div class='content'>" +
+                            "<p>Xin chào <strong>%s</strong>,</p>" +
+                            "<p>Cảm ơn bạn đã đặt hàng tại <strong>Hanoi Metro</strong>!</p>" +
+                            "<div class='order-info'>" +
+                            "<h3>Thông tin đơn hàng</h3>" +
+                            "<p><strong>Mã đơn hàng:</strong> %s</p>" +
+                            "<p><strong>Ngày đặt:</strong> %s</p>" +
+                            "<p><strong>Phương thức thanh toán:</strong> %s</p>" +
+                            "</div>" +
+                            "<h3>Chi tiết sản phẩm</h3>" +
+                            "<table class='items-table'>" +
+                            "<thead><tr><th>Sản phẩm</th><th style='text-align: center;'>Số lượng</th><th style='text-align: right;'>Thành tiền</th></tr></thead>"
+                            +
+                            "<tbody>%s</tbody>" +
+                            "<tfoot>" +
+                            "<tr><td colspan='2' style='text-align: right; padding-top: 10px;'><strong>Phí vận chuyển:</strong></td>"
+                            +
+                            "<td style='text-align: right; padding-top: 10px;'>%s</td></tr>" +
+                            "<tr class='total-row'><td colspan='2' style='text-align: right; padding-top: 10px;'><strong>Tổng cộng:</strong></td>"
+                            +
+                            "<td style='text-align: right; padding-top: 10px;'>%s</td></tr>" +
+                            "</tfoot></table>" +
+                            "<div class='order-info'>" +
+                            "<h3>Địa chỉ giao hàng</h3>" +
+                            "<p style='white-space: pre-line;'>%s</p>" +
+                            "</div>" +
+                            "<p>Chúng tôi sẽ liên hệ với bạn khi đơn hàng được giao cho đơn vị vận chuyển.</p>" +
+                            "<p>Bạn có thể theo dõi trạng thái đơn hàng tại: " +
+                            "<a href='http://localhost:3000/customer-account/orders'>Xem đơn hàng của tôi</a></p>" +
+                            "</div>" +
+                            "<div class='footer'>" +
+                            "<p>Trân trọng,<br>Đội ngũ Hanoi Metro</p>" +
+                            "</div></div></body></html>",
                     customerName,
                     order.getCode(),
                     order.getOrderDate() != null ? order.getOrderDate().toString() : "Hôm nay",
@@ -412,9 +425,9 @@ public class BrevoEmailService {
                     shippingAddressText != null ? shippingAddressText.replace("\n", "<br>") : "Chưa có địa chỉ");
 
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", customerName)});
-            requestBody.put("subject", "Xác nhận đơn hàng " + order.getCode() + " - LuminaBook");
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", customerName) });
+            requestBody.put("subject", "Xác nhận đơn hàng " + order.getCode() + " - Hanoi Metro");
             requestBody.put("textContent", textContent);
             requestBody.put("htmlContent", htmlContent);
 
@@ -423,7 +436,7 @@ public class BrevoEmailService {
             ResponseEntity<Map> response = restTemplate.postForEntity(BREVO_API_URL, request, Map.class);
 
             if (response.getStatusCode() != HttpStatus.CREATED) {
-                log.error("Failed to send order confirmation email. Status: {}, Response: {}", 
+                log.error("Failed to send order confirmation email. Status: {}, Response: {}",
                         response.getStatusCode(), response.getBody());
             }
         } catch (Exception e) {
@@ -464,7 +477,7 @@ public class BrevoEmailService {
                             + "Đơn hàng hiện đang được chuyển sang bộ phận kho để kiểm tra hàng hóa. "
                             + "Sau khi nhân viên kho xác nhận tình trạng sản phẩm, chúng tôi sẽ cập nhật kết quả hoàn tiền cho bạn.%n%n"
                             + "Bạn có thể theo dõi trạng thái đơn tại mục 'Hoàn tiền/ trả hàng' trong tài khoản của mình.%n%n"
-                            + "Trân trọng,%nĐội ngũ LuminaBook",
+                            + "Trân trọng,%nĐội ngũ Hanoi Metro",
                     customerName,
                     orderCode,
                     orderCode,
@@ -474,8 +487,8 @@ public class BrevoEmailService {
             String htmlContent = textContent.replace("\n", "<br>");
 
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook CSKH"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", customerName)});
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro CSKH"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", customerName) });
             requestBody.put("subject", "CSKH đã xác nhận yêu cầu hoàn tiền cho đơn hàng " + orderCode);
             requestBody.put("textContent", textContent);
             requestBody.put("htmlContent", htmlContent);
@@ -496,7 +509,8 @@ public class BrevoEmailService {
     }
 
     /**
-     * Gửi email cho khách khi NHÂN VIÊN kho đã kiểm tra hàng và xác định lỗi bên nào.
+     * Gửi email cho khách khi NHÂN VIÊN kho đã kiểm tra hàng và xác định lỗi bên
+     * nào.
      */
     public void sendReturnStaffInspectionEmail(Order order) {
         if (order == null || order.getUser() == null || order.getUser().getEmail() == null) {
@@ -550,7 +564,7 @@ public class BrevoEmailService {
                             + "- Số tiền dự kiến hoàn lại: %s%n%n"
                             + "Admin sẽ tiến hành hoàn tiền theo kết quả trên trong thời gian sớm nhất.%n"
                             + "Bạn có thể theo dõi trạng thái đơn tại mục 'Hoàn tiền/ trả hàng' trong tài khoản của mình.%n%n"
-                            + "Trân trọng,%nĐội ngũ LuminaBook",
+                            + "Trân trọng,%nĐội ngũ Hanoi Metro",
                     customerName,
                     orderCode,
                     faultSide,
@@ -561,8 +575,8 @@ public class BrevoEmailService {
             String htmlContent = textContent.replace("\n", "<br>");
 
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook Kho hàng"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", customerName)});
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro Kho hàng"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", customerName) });
             requestBody.put("subject", "Kết quả kiểm tra hàng trả về cho đơn hàng " + orderCode);
             requestBody.put("textContent", textContent);
             requestBody.put("htmlContent", htmlContent);
@@ -583,7 +597,8 @@ public class BrevoEmailService {
     }
 
     /**
-     * Gửi email khi yêu cầu trả hàng/hoàn tiền bị từ chối (CSKH hoặc Nhân viên/ Admin).
+     * Gửi email khi yêu cầu trả hàng/hoàn tiền bị từ chối (CSKH hoặc Nhân viên/
+     * Admin).
      */
     public void sendReturnRejectedEmail(Order order) {
         if (order == null || order.getUser() == null || order.getUser().getEmail() == null) {
@@ -619,8 +634,8 @@ public class BrevoEmailService {
                     "Xin chào %s,%n%n"
                             + "Yêu cầu trả hàng/hoàn tiền cho đơn hàng %s của bạn đã bị TỪ CHỐI bởi %s.%n%n"
                             + "LÝ DO TỪ CHỐI:%n%s%n%n"
-                            + "Nếu bạn cần làm rõ thêm, vui lòng liên hệ lại với bộ phận hỗ trợ của LuminaBook.%n%n"
-                            + "Trân trọng,%nĐội ngũ LuminaBook",
+                            + "Nếu bạn cần làm rõ thêm, vui lòng liên hệ lại với bộ phận hỗ trợ của Hanoi Metro.%n%n"
+                            + "Trân trọng,%nĐội ngũ Hanoi Metro",
                     customerName,
                     orderCode,
                     sourceDisplay,
@@ -629,8 +644,8 @@ public class BrevoEmailService {
             String htmlContent = textContent.replace("\n", "<br>");
 
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("sender", Map.of("email", senderEmail, "name", "LuminaBook CSKH"));
-            requestBody.put("to", new Object[] {Map.of("email", toEmail, "name", customerName)});
+            requestBody.put("sender", Map.of("email", senderEmail, "name", "Hanoi Metro CSKH"));
+            requestBody.put("to", new Object[] { Map.of("email", toEmail, "name", customerName) });
             requestBody.put("subject", "Thông báo từ chối yêu cầu hoàn tiền cho đơn hàng " + orderCode);
             requestBody.put("textContent", textContent);
             requestBody.put("htmlContent", htmlContent);

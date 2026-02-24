@@ -30,13 +30,13 @@ spring:
 #  Brevo Email Configuration
 brevo:
   api:
-    key: ${BREVO_API_KEY}
+    key: ${BREVO_API_KEY:NO_KEY_PROVIDED}
   sender:
-    email: ${BREVO_EMAIL} # Email ?� verify trong Brevo
+    email: ${BREVO_EMAIL:no-reply@example.com} # Email đã verify trong Brevo
 
 #  Secret Key
 jwt:
-  signerKey: ${JWT_SIGNERKEY}
+  signerKey: ${JWT_SIGNERKEY:1234567890123456789012345678901212345678901234567890123456789012} # 64 chars for HS512
   valid-duration: 3600
   refreshable-duration: 360000
 
@@ -49,8 +49,8 @@ app:
 
 # GHN configuration
 ghn:
-  token: ${GHN_TOKEN}
-  shop-id: ${GHN_SHOP_ID}
+  token: ${GHN_TOKEN:NO_TOKEN}
+  shop-id: ${GHN_SHOP_ID:0}
   base-url: https://dev-online-gateway.ghn.vn
 
 # Layer1 - Controller: Quan ly cac mapping, endpoint

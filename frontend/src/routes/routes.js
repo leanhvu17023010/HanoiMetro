@@ -31,6 +31,10 @@ import ComplaintsDetailPage from '../pages/Admin/ManageComplaints/ComplaintsDeta
 import ManageContentPage from '../pages/Admin/ManageContent';
 import ReportsAnalyticsPage from '../pages/Admin/ReportsAnalytics';
 
+// News Pages
+import NewsListPage from '../pages/News/NewsListPage';
+import NewsDetailPage from '../pages/News/NewsDetailPage';
+
 // Staff Pages
 import StaffMainPage from '../pages/Staff/StaffMain';
 
@@ -40,6 +44,8 @@ const publicRoutes = [
     { path: '/contact', component: Contact },
     { path: '/support', component: CustomerService },
     { path: '/support/user', component: SupportUserPage },
+    { path: '/news', component: NewsListPage },
+    { path: '/news/:id', component: NewsDetailPage },
 ];
 
 // Private routes
@@ -70,6 +76,7 @@ const privateRoutes = [
 
     // Staff Routes
     { path: '/staff', component: StaffMainPage, layout: StaffLayout, requiredRole: 'STAFF' },
+    { path: '/staff/content', component: ManageContentPage, layout: StaffLayout, requiredRole: 'STAFF' },
 ];
 
 export { publicRoutes, privateRoutes };

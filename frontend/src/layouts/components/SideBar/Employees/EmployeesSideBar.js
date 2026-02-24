@@ -4,7 +4,7 @@ import useLocalStorage from '../../../../hooks/useLocalStorage';
 import avatarFallback from '../../../../assets/icons/icon_defaultAva.png';
 import { useEffect, useState, useCallback } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { getMyInfo } from '../../../../services/api';
+import { getMyInfo, getStoredToken } from '../../../../services/api';
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export default function EmployeesSideBar({ title, homePath, menuItems, roleDispl
 
     useEffect(() => {
         const fetchProfile = async () => {
-            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            const token = getStoredToken();
             if (!token) return;
 
             try {

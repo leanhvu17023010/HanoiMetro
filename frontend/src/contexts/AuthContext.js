@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (newToken, role = null) => {
+        localStorage.setItem('token', newToken);
         setToken(newToken);
         if (role) setUserRole(role);
         window.dispatchEvent(new Event('tokenUpdated'));

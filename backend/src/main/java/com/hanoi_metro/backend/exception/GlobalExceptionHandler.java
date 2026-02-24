@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     private static final String MIN_ATTRIBUTE = "min";
 
     // Xử lý lỗi khi không tìm thấy static resource (404)
-    @ExceptionHandler(value = {NoResourceFoundException.class, NoHandlerFoundException.class})
+    @ExceptionHandler(value = { NoResourceFoundException.class, NoHandlerFoundException.class })
     ResponseEntity<?> handleResourceNotFoundException(Exception exception) {
         // Chỉ log ở mức debug để tránh spam log
         log.debug("Resource not found: {}", exception.getMessage());
@@ -43,15 +43,16 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = Exception.class)
-    ResponseEntity<?> handleException(Exception exception) {
+    ResponseEntity<?> handleException(Exception exception, jakarta.servlet.http.HttpServletRequest request) {
         if (exception instanceof ClientAbortException) {
             return handleClientAbortException((ClientAbortException) exception);
         }
-        if (exception instanceof NoResourceFoundException 
-            || exception instanceof NoHandlerFoundException) {
+        if (exception instanceof NoResourceFoundException
+                || exception instanceof NoHandlerFoundException) {
             return handleResourceNotFoundException(exception);
         }
-        log.error("Unhandled exception in request-return: {}", exception.getMessage(), exception);
+        log.error("Unhandled exception in [{} {}]: {}", request.getMethod(), request.getRequestURI(),
+                exception.getMessage(), exception);
         ApiResponse<?> apiResponse = ApiResponse.builder()
                 .code(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode())
                 .message(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage())
@@ -63,8 +64,8 @@ public class GlobalExceptionHandler {
     ResponseEntity<ApiResponse<?>> handlingAppException(AppException exception) {
         ErrorCode errorCode = exception.getErrorCode();
         // Sử dụng custom message nếu có, nếu không thì dùng message từ ErrorCode
-        String message = exception.getMessage() != null && !exception.getMessage().isEmpty() 
-                ? exception.getMessage() 
+        String message = exception.getMessage() != null && !exception.getMessage().isEmpty()
+                ? exception.getMessage()
                 : errorCode.getMessage();
         log.error("AppException: code={}, message={}", errorCode.getCode(), message, exception);
         ApiResponse<?> apiResponse = ApiResponse.builder()
@@ -98,7 +99,8 @@ public class GlobalExceptionHandler {
         try {
             errorCode = ErrorCode.valueOf(enumKey);
 
-            // getBindingResult là những error mà method MethodArgumentNotValidException wrap lại
+            // getBindingResult là những error mà method MethodArgumentNotValidException
+            // wrap lại
             var constraintViolation = exception
                     .getBindingResult()
                     .getAllErrors()
@@ -106,7 +108,8 @@ public class GlobalExceptionHandler {
                     .unwrap(ConstraintViolation.class);
 
             // getConstraintDescriptor: get nội dung những annotation
-            // getAttributes: lấy Map các tham số trong annotation. VD: {min=3, message="USERNAME_TOO_SHORT", ...}
+            // getAttributes: lấy Map các tham số trong annotation. VD: {min=3,
+            // message="USERNAME_TOO_SHORT", ...}
             attributes = constraintViolation.getConstraintDescriptor().getAttributes();
 
             log.info(attributes.toString());
@@ -115,8 +118,8 @@ public class GlobalExceptionHandler {
             // Nếu không tìm thấy ErrorCode enum, sử dụng message từ validation annotation
             if (exception.getFieldError() != null) {
                 String validationMessage = exception.getFieldError().getDefaultMessage();
-                log.warn("Validation error - field: {}, message: {}", 
-                    exception.getFieldError().getField(), validationMessage);
+                log.warn("Validation error - field: {}, message: {}",
+                        exception.getFieldError().getField(), validationMessage);
                 ApiResponse<?> apiResponse = new ApiResponse();
                 apiResponse.setCode(ErrorCode.INVALID_KEY.getCode());
                 apiResponse.setMessage(validationMessage);

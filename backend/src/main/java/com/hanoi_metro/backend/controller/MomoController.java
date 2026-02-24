@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/momo")
+@Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Slf4j
 public class MomoController {
 
     MomoService momoService;
@@ -38,10 +38,11 @@ public class MomoController {
 
     /**
      * IPN handler nhận kết quả thanh toán từ MoMo.
-     * Hiện tại chỉ log lại, bạn có thể bổ sung xử lý cập nhật trạng thái đơn hàng sau.
+     * Hiện tại chỉ log lại, bạn có thể bổ sung xử lý cập nhật trạng thái đơn hàng
+     * sau.
      */
     @PostMapping("/ipn-handler")
-    public ResponseEntity<Void> handleIpn(@RequestBody MomoIpnRequest request) {
+    public ResponseEntity<Void> handleIpn(@RequestBody com.hanoi_metro.backend.dto.request.MomoIpnRequest request) {
         if (!momoService.validateIpnSignature(request)) {
             return ResponseEntity.badRequest().build();
         }
@@ -49,5 +50,3 @@ public class MomoController {
         return ResponseEntity.noContent().build();
     }
 }
-
-

@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.hanoi_metro.backend.dto.request.ApiResponse;
 import com.hanoi_metro.backend.dto.request.BannerCreationRequest;
@@ -26,11 +27,13 @@ public class BannerController {
 
     BannerService bannerService;
 
-    @PostMapping
-    ApiResponse<BannerResponse> createBanner(@RequestBody @Valid BannerCreationRequest request) {
-        log.info("Controller: create Banner");
+    @PostMapping(consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+    ApiResponse<BannerResponse> createBanner(
+            @ModelAttribute @Valid BannerCreationRequest request,
+            @RequestParam(value = "image", required = false) org.springframework.web.multipart.MultipartFile image) {
+        log.info("Controller: create Banner with image");
         return ApiResponse.<BannerResponse>builder()
-                .result(bannerService.createBanner(request))
+                .result(bannerService.createBanner(request, image))
                 .build();
     }
 
@@ -55,11 +58,13 @@ public class BannerController {
                 .build();
     }
 
-    @PutMapping("/{bannerId}")
+    @PutMapping(value = "/{bannerId}", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
     ApiResponse<BannerResponse> updateBanner(
-            @PathVariable String bannerId, @RequestBody @Valid BannerUpdateRequest request) {
+            @PathVariable String bannerId,
+            @ModelAttribute @Valid BannerUpdateRequest request,
+            @RequestParam(value = "image", required = false) org.springframework.web.multipart.MultipartFile image) {
         return ApiResponse.<BannerResponse>builder()
-                .result(bannerService.updateBanner(bannerId, request))
+                .result(bannerService.updateBanner(bannerId, request, image))
                 .build();
     }
 

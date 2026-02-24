@@ -22,7 +22,6 @@ public class BannerCreationRequest {
     @Size(max = 1000, message = "Mô tả không được vượt quá 1000 ký tự")
     String description;
 
-    @NotBlank(message = "URL hình ảnh không được để trống")
     String imageUrl;
 
     String linkUrl;

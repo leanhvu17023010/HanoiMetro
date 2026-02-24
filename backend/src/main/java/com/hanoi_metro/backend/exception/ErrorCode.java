@@ -30,7 +30,8 @@ public enum ErrorCode {
     INVALID_PROMOTION_SCOPE(2003, "Phạm vi áp dụng khuyến mãi không hợp lệ", HttpStatus.BAD_REQUEST),
     PROMOTION_PRODUCT_CONFLICT(2004, "Một số sản phẩm đã có khuyến mãi đang hoạt động", HttpStatus.BAD_REQUEST),
     PROMOTION_CODE_ALREADY_EXISTS(2005, "Mã khuyến mãi đã tồn tại", HttpStatus.BAD_REQUEST),
-    PROMOTION_OVERLAP_CONFLICT(2006, "Khuyến mãi trùng lặp với chương trình khác trong cùng khoảng thời gian", HttpStatus.BAD_REQUEST),
+    PROMOTION_OVERLAP_CONFLICT(2006, "Khuyến mãi trùng lặp với chương trình khác trong cùng khoảng thời gian",
+            HttpStatus.BAD_REQUEST),
 
     // Voucher
     VOUCHER_NOT_EXISTED(3001, "Voucher không tồn tại", HttpStatus.NOT_FOUND),
@@ -69,7 +70,10 @@ public enum ErrorCode {
     FILE_UPLOAD_FAILED(8001, "Không thể upload file", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // NOTIFICATION
-    NOTIFICATION_NOT_EXISTED(9001, "Thông báo không tồn tại", HttpStatus.NOT_FOUND);
+    NOTIFICATION_NOT_EXISTED(9001, "Thông báo không tồn tại", HttpStatus.NOT_FOUND),
+
+    // NEWS
+    NEWS_NOT_EXISTED(11001, "Tin tức không tồn tại", HttpStatus.NOT_FOUND);
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
         this.code = code;

@@ -69,15 +69,9 @@ let refreshPromise = null;
 // Helper function to save token to storage (both localStorage and sessionStorage)
 function saveTokenToStorage(token) {
     try {
-        // Check if token exists in localStorage (remember me) or sessionStorage
-        const hasLocalToken = localStorage.getItem('token');
-        const hasSessionToken = sessionStorage.getItem('token');
-
-        if (hasLocalToken) {
+        if (token) {
             localStorage.setItem('token', token);
             localStorage.setItem('refreshToken', token);
-        }
-        if (hasSessionToken) {
             sessionStorage.setItem('token', token);
         }
 
@@ -607,6 +601,142 @@ export async function uploadVoucherMedia(file, token = null) {
 
 export async function uploadPromotionMedia(file, token = null) {
     return uploadMediaFiles(media.uploadPromotion, file, token);
+}
+
+export async function uploadNewsMedia(file, token = null) {
+    return uploadMediaFiles(media.uploadNews, file, token);
+}
+
+export async function uploadBannerMedia(file, token = null) {
+    return uploadMediaFiles(media.uploadBanner, file, token);
+}
+
+// ========== NEWS API ==========
+export async function getAllNews(token = null) {
+    const { data } = await apiRequest(API_ROUTES.news.root, { token });
+    return extractResult(data, true);
+}
+
+export async function getActiveNews(token = null) {
+    const { data } = await apiRequest(API_ROUTES.news.active, { token });
+    return extractResult(data, true);
+}
+
+export async function getNewsById(id, token = null) {
+    const { data } = await apiRequest(API_ROUTES.news.detail(id), { token });
+    return extractResult(data);
+}
+
+export async function createNews(newsData, token = null) {
+    const formData = new FormData();
+    const { image, ...data } = newsData;
+    Object.keys(data).forEach(key => {
+        if (data[key] !== null && data[key] !== undefined) {
+            formData.append(key, data[key]);
+        }
+    });
+    if (image) {
+        formData.append('image', image);
+    }
+    const { data: resData, ok } = await apiRequest(API_ROUTES.news.root, {
+        method: 'POST',
+        body: formData,
+        token,
+        isFormData: true
+    });
+    return { ok, data: extractResult(resData) };
+}
+
+export async function updateNews(id, newsData, token = null) {
+    const formData = new FormData();
+    const { image, ...data } = newsData;
+    Object.keys(data).forEach(key => {
+        if (data[key] !== null && data[key] !== undefined) {
+            formData.append(key, data[key]);
+        }
+    });
+    if (image) {
+        formData.append('image', image);
+    }
+    const { data: resData, ok } = await apiRequest(API_ROUTES.news.detail(id), {
+        method: 'PUT',
+        body: formData,
+        token,
+        isFormData: true
+    });
+    return { ok, data: extractResult(resData) };
+}
+
+export async function deleteNews(id, token = null) {
+    const { data, ok } = await apiRequest(API_ROUTES.news.detail(id), { method: 'DELETE', token });
+    return { ok, data: extractResult(data) };
+}
+
+// ========== BANNER API ==========
+export async function getAllBanners(token = null) {
+    const { data } = await apiRequest(API_ROUTES.banners.root, { token });
+    return extractResult(data, true);
+}
+
+export async function getActiveBanners(token = null) {
+    const { data } = await apiRequest(API_ROUTES.banners.active, { token });
+    return extractResult(data, true);
+}
+
+export async function getBannerById(id, token = null) {
+    const { data } = await apiRequest(API_ROUTES.banners.detail(id), { token });
+    return extractResult(data);
+}
+
+export async function createBanner(bannerData, token = null) {
+    const formData = new FormData();
+    const { image, productIds, ...data } = bannerData;
+    Object.keys(data).forEach(key => {
+        if (data[key] !== null && data[key] !== undefined) {
+            formData.append(key, data[key]);
+        }
+    });
+    if (productIds && Array.isArray(productIds)) {
+        productIds.forEach(id => formData.append('productIds', id));
+    }
+    if (image) {
+        formData.append('image', image);
+    }
+    const { data: resData, ok } = await apiRequest(API_ROUTES.banners.root, {
+        method: 'POST',
+        body: formData,
+        token,
+        isFormData: true
+    });
+    return { ok, data: extractResult(resData) };
+}
+
+export async function updateBanner(id, bannerData, token = null) {
+    const formData = new FormData();
+    const { image, productIds, ...data } = bannerData;
+    Object.keys(data).forEach(key => {
+        if (data[key] !== null && data[key] !== undefined) {
+            formData.append(key, data[key]);
+        }
+    });
+    if (productIds && Array.isArray(productIds)) {
+        productIds.forEach(id => formData.append('productIds', id));
+    }
+    if (image) {
+        formData.append('image', image);
+    }
+    const { data: resData, ok } = await apiRequest(API_ROUTES.banners.detail(id), {
+        method: 'PUT',
+        body: formData,
+        token,
+        isFormData: true
+    });
+    return { ok, data: extractResult(resData) };
+}
+
+export async function deleteBanner(id, token = null) {
+    const { data, ok } = await apiRequest(API_ROUTES.banners.detail(id), { method: 'DELETE', token });
+    return { ok, data: extractResult(data) };
 }
 
 // ========== VOUCHER API ==========

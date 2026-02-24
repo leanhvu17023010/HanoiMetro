@@ -50,6 +50,18 @@ export const API_ROUTES = {
         uploadProduct: '/media/upload-product',
         uploadVoucher: '/media/upload-voucher',
         uploadPromotion: '/media/upload-promotion',
+        uploadNews: '/media/upload-news',
+        uploadBanner: '/media/upload-banner',
+    },
+    news: {
+        root: '/news',
+        active: '/news/active',
+        detail: (id) => `/news/${id}`,
+    },
+    banners: {
+        root: '/banners',
+        active: '/banners/active',
+        detail: (id) => `/banners/${id}`,
     },
     vouchers: {
         root: '/vouchers',
