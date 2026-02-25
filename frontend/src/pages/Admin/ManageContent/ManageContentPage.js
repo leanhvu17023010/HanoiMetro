@@ -17,6 +17,8 @@ import {
     deleteNews,
     uploadNewsMedia
 } from '../../../services';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 const cx = classNames.bind(styles);
 
@@ -297,13 +299,12 @@ function ManageContentPage() {
                                             onChange={e => setFormData({ ...formData, summary: e.target.value })}
                                         />
                                     </div>
-                                    <div className={cx('form-group')}>
+                                    <div className={cx('form-group', 'quill-editor')}>
                                         <label>Nội dung chi tiết</label>
-                                        <textarea
-                                            required
-                                            style={{ height: '200px' }}
+                                        <ReactQuill
+                                            theme="snow"
                                             value={formData.content}
-                                            onChange={e => setFormData({ ...formData, content: e.target.value })}
+                                            onChange={(val) => setFormData({ ...formData, content: val })}
                                         />
                                     </div>
                                 </>

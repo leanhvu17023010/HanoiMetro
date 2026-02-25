@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ManageOrderDetailPage.module.scss';
-import { getStoredToken, formatDateTime } from '../../../../services';
+import { getStoredToken, formatDateTime, getApiBaseUrl } from '../../../../services';
 import Notification from '../../../../components/Common/Notification/Notification';
 import ConfirmDialog from '../../../../components/Common/ConfirmDialog/DeleteAccountDialog';
 
@@ -21,8 +21,8 @@ function ManageOrderDetailPage() {
         try {
             setLoading(true);
             const token = getStoredToken();
-            const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-            const resp = await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/orders/${id}`, {
+            const apiBaseUrl = getApiBaseUrl();
+            const resp = await fetch(`${apiBaseUrl}/orders/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await resp.json();
@@ -44,8 +44,8 @@ function ManageOrderDetailPage() {
             onConfirm: async () => {
                 try {
                     const token = getStoredToken();
-                    const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-                    await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/orders/${id}/confirm-refund`, {
+                    const apiBaseUrl = getApiBaseUrl();
+                    await fetch(`${apiBaseUrl}/orders/${id}/confirm-refund`, {
                         method: 'POST',
                         headers: { Authorization: `Bearer ${token}` }
                     });

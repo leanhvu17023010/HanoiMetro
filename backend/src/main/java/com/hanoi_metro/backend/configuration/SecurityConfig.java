@@ -31,7 +31,8 @@ public class SecurityConfig {
             "/auth/verify-otp",
             "/auth/reset-password",
             "/shipments/ghn/fees",
-            "/api/momo/ipn-handler"
+            "/api/momo/ipn-handler",
+            "/api/tickets"
     };
 
     private static final String[] PUBLIC_GET_ENDPOINTS = {
@@ -47,8 +48,8 @@ public class SecurityConfig {
             "/uploads/**",
             "/assets/**",
             "/static/**",
-            "/banners/active",
-            "/news/active",
+            "/banners/**",
+            "/news/**",
             "/banner_media/**",
             "/news_media/**",
             "/ghn/provinces",

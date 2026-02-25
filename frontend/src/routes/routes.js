@@ -5,6 +5,8 @@ import SupportUserPage from '../pages/SupportUser';
 import MapPage from '../pages/Map/MapPage';
 import UserGuidePage from '../pages/UserGuide/UserGuidePage';
 import TicketInfoPage from '../pages/TicketInfo/TicketInfoPage';
+import AboutPage from '../pages/About/AboutPage';
+import MyTicketsPage from '../pages/MyTickets/MyTicketsPage';
 
 // Layouts
 import AdminLayout from '../layouts/AdminLayout';
@@ -52,6 +54,8 @@ const publicRoutes = [
     { path: '/map', component: MapPage },
     { path: '/metro-userguide', component: UserGuidePage },
     { path: '/afc-tickets', component: TicketInfoPage },
+    { path: '/about', component: AboutPage },
+    { path: '/my-tickets', component: MyTicketsPage },
 ];
 
 // Private routes

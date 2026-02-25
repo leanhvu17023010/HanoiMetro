@@ -12,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TicketCreationRequest {
 
-    @NotBlank
     String orderCode;
 
     @NotBlank

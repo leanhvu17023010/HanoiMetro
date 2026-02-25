@@ -38,6 +38,9 @@ public class TicketService {
     @Transactional
     public TicketResponse create(TicketCreationRequest request) {
         SupportTicket ticket = ticketMapper.toEntity(request);
+        if (ticket.getOrderCode() == null) {
+            ticket.setOrderCode("");
+        }
         ticket.setStatus(TicketStatus.NEW);
         ticket.setAssignedTo(TicketAssignee.CS);
         ticket.setCreatedAt(LocalDateTime.now());
@@ -64,6 +67,12 @@ public class TicketService {
                 .toList();
     }
 
+    public List<TicketResponse> listByEmail(String email) {
+        return supportTicketRepository.findByEmailOrderByCreatedAtDesc(email).stream()
+                .map(ticketMapper::toResponse)
+                .toList();
+    }
+
     public List<TicketResponse> listByStatus(TicketStatus status) {
         return supportTicketRepository.findByStatusOrderByCreatedAtDesc(status).stream()
                 .map(this::toResponseWithHandler)
@@ -71,29 +80,29 @@ public class TicketService {
     }
 
     public TicketResponse getById(String id) {
-        SupportTicket ticket =
-                supportTicketRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
         return toResponseWithHandler(ticket);
     }
 
     @Transactional
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','CUSTOMER_SUPPORT')")
     public TicketResponse update(String id, TicketUpdateRequest request) {
-        SupportTicket ticket =
-                supportTicketRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
-        
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
+
         // Get current user from security context
         Authentication authentication = SecurityUtil.getAuthentication();
         User currentUser = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-        
+
         // If CSKH saves a note (tiếp nhận khiếu nại), automatically assign to them
-        if (request.getHandlerNote() != null && currentUser.getRole() != null 
+        if (request.getHandlerNote() != null && currentUser.getRole() != null
                 && currentUser.getRole().getName().equals("CUSTOMER_SUPPORT")) {
-            
+
             // Check if ticket already has a handler
             boolean hasHandler = (ticket.getHandlerId() != null && !ticket.getHandlerId().isEmpty());
-            
+
             if (!hasHandler) {
                 // No handler yet - check if ticket is resolved
                 if (ticket.getStatus() == TicketStatus.RESOLVED) {
@@ -115,7 +124,7 @@ public class TicketService {
             // Admin or Staff can always update note
             ticket.setHandlerNote(request.getHandlerNote());
         }
-        
+
         if (request.getStatus() != null) {
             ticket.setStatus(TicketStatus.valueOf(request.getStatus()));
         }
@@ -131,8 +140,8 @@ public class TicketService {
     @Transactional
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','CUSTOMER_SUPPORT')")
     public TicketResponse escalate(String id) {
-        SupportTicket ticket =
-                supportTicketRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
         ticket.setAssignedTo(TicketAssignee.ADMIN);
         ticket.setStatus(TicketStatus.ESCALATED);
         ticket.setUpdatedAt(LocalDateTime.now());
@@ -143,14 +152,14 @@ public class TicketService {
     @Transactional
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','CUSTOMER_SUPPORT')")
     public TicketResponse resolve(String id, String handlerNote) {
-        SupportTicket ticket =
-                supportTicketRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
-        
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.TICKET_NOT_EXISTED));
+
         // Get current user from security context
         Authentication authentication = SecurityUtil.getAuthentication();
         User currentUser = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-        
+
         if (handlerNote != null) {
             ticket.setHandlerNote(handlerNote);
             // If CSKH resolves, set handlerId

@@ -70,4 +70,12 @@ public class TicketController {
                 .result(ticketService.resolve(id, note))
                 .build();
     }
+
+    // Public: customer checks their own tickets by email
+    @GetMapping("/my")
+    public ApiResponse<List<TicketResponse>> listByEmail(@RequestParam String email) {
+        return ApiResponse.<List<TicketResponse>>builder()
+                .result(ticketService.listByEmail(email))
+                .build();
+    }
 }

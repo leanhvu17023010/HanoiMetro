@@ -24,11 +24,11 @@ function Footer() {
                 <div className={cx('footer-col')}>
                     <h4>Thông tin doanh nghiệp</h4>
                     <ul className={cx('footer-links')}>
-                        <li><Link to="/about-us/announcements">Công bố thông tin doanh nghiệp</Link></li>
-                        <li><Link to="/about-us/contact">Liên hệ</Link></li>
-                        <li><Link to="/about-us/organization">Sơ đồ tổ chức</Link></li>
-                        <li><Link to="/about-us/vision">Tầm nhìn - Sứ mệnh</Link></li>
-                        <li><Link to="/about-us/policy">Quyết định - Quy chế công ty</Link></li>
+                        <li><Link to="/about">Giới thiệu công ty</Link></li>
+                        <li><Link to="/about#vision-mission">Tầm nhìn - Sứ mệnh</Link></li>
+                        <li><Link to="/about#values">Giá trị cốt lõi</Link></li>
+                        <li><Link to="/about#history">Lịch sử hình thành</Link></li>
+                        <li><Link to="/about#lien-he">Liên hệ</Link></li>
                     </ul>
                 </div>
 

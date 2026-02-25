@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ManageOrdersPage.module.scss';
-import { formatDateTime, getStoredToken } from '../../../services';
+import { formatDateTime, getStoredToken, getApiBaseUrl } from '../../../services';
 
 const cx = classNames.bind(styles);
 
@@ -32,8 +32,8 @@ function ManageOrdersPage() {
         try {
             setLoading(true);
             const token = getStoredToken();
-            const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-            const resp = await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/orders`, {
+            const apiBaseUrl = getApiBaseUrl();
+            const resp = await fetch(`${apiBaseUrl}/orders`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await resp.json();

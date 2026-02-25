@@ -48,11 +48,10 @@ function NewsDetailPage() {
                     </div>
                 )}
 
-                <div className={cx('news-content')}>
-                    {news.content?.split('\n').map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                    ))}
-                </div>
+                <div
+                    className={cx('news-content')}
+                    dangerouslySetInnerHTML={{ __html: news.content }}
+                />
             </article>
         </div>
     );

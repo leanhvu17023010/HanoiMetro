@@ -24,7 +24,7 @@ public class SupportTicket {
     String id;
 
     // Order info submitted by customer
-    @Column(name = "order_code", nullable = false)
+    @Column(name = "order_code", nullable = true)
     String orderCode;
 
     String customerName;

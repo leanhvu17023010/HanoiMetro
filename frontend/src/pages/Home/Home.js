@@ -53,11 +53,6 @@ function Home() {
         { title: 'Tin tức & Thông báo', icon: '📰', color: '#1d76bb', path: '/news' }
     ];
 
-    // Splitting news into two columns for the existing UI
-    const midIndex = Math.ceil(newsList.length / 2);
-    const leftNews = newsList.slice(0, 3); // Take first 3
-    const rightNews = newsList.slice(3, 6); // Take next 3
-
     return (
         <div className={cx('page-container')}>
             <section className={cx('hero-viewport')}>
@@ -110,33 +105,23 @@ function Home() {
                         </button>
                     </div>
 
-                    <div className={cx('news-content')}>
-                        <div className={cx('news-column')}>
-                            {leftNews.length > 0 ? leftNews.map((news) => (
-                                <div key={news.id} className={cx('news-entry')} onClick={() => navigate(`/news/${news.id}`)} style={{ cursor: 'pointer' }}>
-                                    <div className={cx('bullet')}>
-                                        <div className={cx('bullet-inner')} />
+                    <div className={cx('news-grid')}>
+                        {newsList.length > 0 ? newsList.slice(0, 6).map((news) => (
+                            <div key={news.id} className={cx('news-card')} onClick={() => navigate(`/news/${news.id}`)}>
+                                {news.imageUrl && (
+                                    <div className={cx('news-thumb')}>
+                                        <img src={normalizeMediaUrl(news.imageUrl)} alt={news.title} />
                                     </div>
-                                    <p>{news.title}</p>
+                                )}
+                                <div className={cx('news-info')}>
+                                    <span className={cx('news-date')}>{new Date(news.createdAt).toLocaleDateString('vi-VN')}</span>
+                                    <h3 className={cx('news-title')}>{news.title}</h3>
+                                    <div className={cx('news-summary')}>{news.summary}</div>
                                 </div>
-                            )) : (
-                                <p style={{ color: '#999', fontSize: '14px' }}>Chưa có thông báo mới.</p>
-                            )}
-                        </div>
-                        <div className={cx('news-divider')} />
-                        <div className={cx('news-column')}>
-                            {rightNews.length > 0 ? rightNews.map((news) => (
-                                <div key={news.id} className={cx('news-entry')} onClick={() => navigate(`/news/${news.id}`)} style={{ cursor: 'pointer' }}>
-                                    <div className={cx('bullet')}>
-                                        <div className={cx('bullet-inner')} />
-                                    </div>
-                                    <p>{news.title}</p>
-                                </div>
-                            )) : rightNews.length === 0 && leftNews.length > 3 ? (
-                                // Fallback if we have more than 3 news but didn't split them correctly for display
-                                <p style={{ color: '#999', fontSize: '14px' }}>Hết tin tức.</p>
-                            ) : null}
-                        </div>
+                            </div>
+                        )) : (
+                            <p style={{ color: '#999', fontSize: '15px' }}>Chưa có thông báo mới.</p>
+                        )}
                     </div>
                 </div>
             </section>

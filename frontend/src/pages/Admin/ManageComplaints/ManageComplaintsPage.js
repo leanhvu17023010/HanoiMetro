@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ManageComplaintsPage.module.scss';
 import SearchAndSort from '../../../components/Common/SearchAndSort';
-import { getStoredToken, formatDateTime } from '../../../services';
+import { getStoredToken, formatDateTime, getApiBaseUrl } from '../../../services';
 
 const cx = classNames.bind(styles);
 
 const statusMap = {
     NEW: 'Chờ xử lý',
-    IN_PROGRESS: 'Đang xử lý',
     RESOLVED: 'Đã giải quyết',
-    ESCALATED: 'Chuyển Admin',
 };
 
 function ManageComplaintsPage() {
@@ -27,8 +25,8 @@ function ManageComplaintsPage() {
         try {
             setLoading(true);
             const token = getStoredToken();
-            const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-            const resp = await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/api/tickets`, {
+            const apiBaseUrl = getApiBaseUrl();
+            const resp = await fetch(`${apiBaseUrl}/api/tickets`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await resp.json();
@@ -64,7 +62,7 @@ function ManageComplaintsPage() {
                 searchPlaceholder="Tìm kiếm theo tên, nội dung..."
                 searchValue={searchTerm}
                 onSearchChange={e => { setSearchTerm(e.target.value); applyFilters(e.target.value, statusFilter); }}
-                sortOptions={[{ value: 'all', label: 'Tất cả trạng thái' }, { value: 'Chờ xử lý', label: 'Chờ xử lý' }, { value: 'Đang xử lý', label: 'Đang xử lý' }, { value: 'Đã giải quyết', label: 'Đã giải quyết' }]}
+                sortOptions={[{ value: 'all', label: 'Tất cả trạng thái' }, { value: 'NEW', label: 'Chờ xử lý' }, { value: 'RESOLVED', label: 'Đã giải quyết' }]}
                 sortValue={statusFilter}
                 onSortChange={e => { setStatusFilter(e.target.value); applyFilters(searchTerm, e.target.value); }}
             />

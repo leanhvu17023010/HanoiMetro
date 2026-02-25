@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ReportsAnalyticsPage.module.scss';
-import { getStoredToken, formatDateTime } from '../../../services';
+import { getStoredToken, formatDateTime, getApiBaseUrl } from '../../../services';
 
 const cx = classNames.bind(styles);
 
@@ -15,12 +15,11 @@ function ReportsAnalyticsPage() {
         setLoading(true);
         try {
             const token = getStoredToken();
-            const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-            const base = apiBaseUrl || 'http://localhost:8080/metro/api/v1';
+            const apiBaseUrl = getApiBaseUrl();
 
             // Mocking some data if API is not fully ready for analytics
             // In real world, we would call /api/financial/summary or similar
-            const resp = await fetch(`${base}/orders/statistics?mode=${timeMode}`, {
+            const resp = await fetch(`${apiBaseUrl}/orders/statistics?mode=${timeMode}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await resp.json();

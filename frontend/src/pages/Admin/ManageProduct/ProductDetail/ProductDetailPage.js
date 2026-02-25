@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ProductDetailPage.module.scss';
-import { getProductById, getStoredToken, approveProduct, deleteUser } from '../../../../services';
+import { getProductById, getStoredToken, approveProduct, deleteUser, getApiBaseUrl } from '../../../../services';
 import Notification from '../../../../components/Common/Notification/Notification';
 import ConfirmDialog from '../../../../components/Common/ConfirmDialog/DeleteAccountDialog';
 
@@ -67,8 +67,8 @@ function ProductDetailPage() {
                 try {
                     const token = getStoredToken();
                     // Using deleteProduct endpoint if it exists, otherwise assuming deleteUser logic is generic for IDs if mapped
-                    const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-                    const url = `${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/products/${id}`;
+                    const apiBaseUrl = getApiBaseUrl();
+                    const url = `${apiBaseUrl}/products/${id}`;
                     const resp = await fetch(url, {
                         method: 'DELETE',
                         headers: { Authorization: `Bearer ${token}` }

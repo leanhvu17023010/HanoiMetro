@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ComplaintsDetailPage.module.scss';
-import { getStoredToken, formatDateTime } from '../../../../services';
+import { getStoredToken, formatDateTime, getApiBaseUrl } from '../../../../services';
 import Notification from '../../../../components/Common/Notification/Notification';
 
 const cx = classNames.bind(styles);
 
 const statusMap = {
     NEW: 'Chờ xử lý',
-    IN_PROGRESS: 'Đang xử lý',
     RESOLVED: 'Đã giải quyết',
-    ESCALATED: 'Chuyển Admin',
 };
 
 function ComplaintsDetailPage() {
@@ -29,8 +27,8 @@ function ComplaintsDetailPage() {
             try {
                 setLoading(true);
                 const token = getStoredToken();
-                const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-                const resp = await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/api/tickets/${id}`, {
+                const apiBaseUrl = getApiBaseUrl();
+                const resp = await fetch(`${apiBaseUrl}/api/tickets/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const data = await resp.json();
@@ -51,13 +49,20 @@ function ComplaintsDetailPage() {
         setSaving(true);
         try {
             const token = getStoredToken();
-            const apiBaseUrl = typeof process !== 'undefined' ? process.env?.REACT_APP_API_BASE_URL : undefined;
-            await fetch(`${apiBaseUrl || 'http://localhost:8080/metro/api/v1'}/api/tickets/${id}`, {
+            const apiBaseUrl = getApiBaseUrl();
+
+            // Tự động chuyển trạng thái nếu đang là "Chờ xử lý"
+            let finalStatus = selectedStatus;
+            if (selectedStatus === 'NEW') {
+                finalStatus = 'RESOLVED';
+            }
+
+            await fetch(`${apiBaseUrl}/api/tickets/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-                body: JSON.stringify({ handlerNote: note, status: selectedStatus })
+                body: JSON.stringify({ handlerNote: note, status: finalStatus })
             });
-            setNotif({ open: true, type: 'success', title: 'Thành công', message: 'Đã cập nhật' });
+            setNotif({ open: true, type: 'success', title: 'Thành công', message: 'Đã cập nhật trạng thái đã giải quyết' });
             setTimeout(() => navigate('/admin/complaints'), 1500);
         } catch (e) {
             setNotif({ open: true, type: 'error', title: 'Lỗi', message: 'Không thể cập nhật' });
@@ -77,6 +82,7 @@ function ComplaintsDetailPage() {
             <div className={cx('content-card')}>
                 <div className={cx('info-section')}>
                     <p><strong>Khách hàng:</strong> {complaint.customerName}</p>
+                    <p><strong>Số điện thoại:</strong> {complaint.phone || 'Chưa cung cấp'}</p>
                     <p><strong>Email:</strong> {complaint.email}</p>
                     <p><strong>Ngày gửi:</strong> {formatDateTime(complaint.createdAt)}</p>
                     <p><strong>Nội dung:</strong></p>
@@ -84,19 +90,47 @@ function ComplaintsDetailPage() {
                 </div>
 
                 <div className={cx('action-section')}>
+                    {complaint.status === 'RESOLVED' ? (
+                        <div className={cx('resolved-alert')}>
+                            Khiếu nại này đã được giải quyết thành công. Nội dung hiện đã ở chế độ chỉ đọc.
+                        </div>
+                    ) : (
+                        <div className={cx('status-badge', 'pending')}>
+                            Đang trong quá trình xử lý
+                        </div>
+                    )}
+
                     <div className={cx('group')}>
-                        <label>Trạng thái:</label>
-                        <select value={selectedStatus} onChange={e => setSelectedStatus(e.target.value)}>
+                        <label>Trạng thái</label>
+                        <select
+                            value={selectedStatus}
+                            onChange={e => setSelectedStatus(e.target.value)}
+                            disabled={complaint.status === 'RESOLVED'}
+                        >
                             {Object.entries(statusMap).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                         </select>
                     </div>
+
                     <div className={cx('group')}>
-                        <label>Ghi chú xử lý:</label>
-                        <textarea value={note} onChange={e => setNote(e.target.value)} rows={6} placeholder="Nhập phản hồi cho khách hàng..." />
+                        <label>Phản hồi khách hàng (Ghi chú)</label>
+                        <textarea
+                            value={note}
+                            onChange={e => setNote(e.target.value)}
+                            rows={6}
+                            placeholder="Nhập nội dung phản hồi chi tiết tới khách hàng..."
+                            disabled={complaint.status === 'RESOLVED'}
+                        />
                     </div>
+
                     <div className={cx('actions')}>
-                        <button className={cx('btn', 'cancel')} onClick={() => navigate(-1)}>Hủy</button>
-                        <button className={cx('btn', 'save')} onClick={handleSave} disabled={saving}>{saving ? 'Đang lưu...' : 'Lưu & Phản hồi'}</button>
+                        <button className={cx('btn', 'cancel')} onClick={() => navigate(-1)}>
+                            {complaint.status === 'RESOLVED' ? 'Thoát' : 'Hủy'}
+                        </button>
+                        {complaint.status !== 'RESOLVED' && (
+                            <button className={cx('btn', 'save')} onClick={handleSave} disabled={saving}>
+                                {saving ? 'Đang gửi...' : 'Xác nhận & Hoàn tất'}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>
