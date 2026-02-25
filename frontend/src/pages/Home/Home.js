@@ -12,6 +12,14 @@ import {
 import heroImage from '../../assets/images/img_qc.png';
 import metroTrainImg from '../../assets/images/img_christmas.png';
 
+// guidance card images
+import imgChuongTrinh from '../../assets/images/chuongtrinhuudaive.png';
+import imgHuongDan from '../../assets/images/huongdankhiditau.png';
+import imgThongTinVe from '../../assets/images/thongtinve.png';
+
+// Import local components
+import MetroLineMap from '../../components/Home/MetroLineMap/MetroLineMap';
+
 const cx = classNames.bind(styles);
 
 function Home() {
@@ -93,35 +101,110 @@ function Home() {
                 </div>
             </section>
 
-            <section className={cx('news-announcement')}>
+            <section className={cx('metro-announcement')}>
                 <div className={cx('container')}>
-                    <div className={cx('section-header')} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                        <h2 className={cx('section-title')} style={{ margin: 0 }}>TIN TỨC & THÔNG BÁO</h2>
-                        <button
-                            style={{ background: 'none', border: 'none', color: '#1d76bb', fontWeight: 600, cursor: 'pointer' }}
-                            onClick={() => navigate('/news')}
-                        >
-                            Xem tất cả &rarr;
-                        </button>
+                    <div className={cx('announcement-wrapper')}>
+                        <h2 className={cx('announcement-title')}>THÔNG BÁO</h2>
+                        <div className={cx('announcement-content')}>
+                            <div className={cx('announcement-col')}>
+                                {newsList.slice(0, 3).map((news) => (
+                                    <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                        <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
+                                            <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                        </svg>
+                                        <span className={cx('text')}>{news.title.toUpperCase()}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={cx('divider-vertical')}></div>
+                            <div className={cx('announcement-col')}>
+                                {newsList.slice(3, 6).map((news) => (
+                                    <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                        <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
+                                            <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                        </svg>
+                                        <span className={cx('text')}>{news.title.toUpperCase()}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <MetroLineMap />
+
+            <section className={cx('huong-dan-section')}>
+                <div className={cx('container', 'huong-dan-container')}>
+                    <h2 className={cx('huong-dan-main-title')}>HƯỚNG DẪN</h2>
+                    <div className={cx('huong-dan-grid')}>
+                        <div className={cx('huong-dan-card')} onClick={() => navigate('/afc-tickets')}>
+                            <div className={cx('huong-dan-image-wrapper')}>
+                                <img src={imgChuongTrinh} alt="Chương trình ưu đãi vé" />
+                            </div>
+                        </div>
+                        <div className={cx('huong-dan-card')} onClick={() => navigate('/metro-userguide')}>
+                            <div className={cx('huong-dan-image-wrapper')}>
+                                <img src={imgHuongDan} alt="Hướng dẫn khi đi tàu" />
+                            </div>
+                        </div>
+                        <div className={cx('huong-dan-card')} onClick={() => navigate('/afc-tickets')}>
+                            <div className={cx('huong-dan-image-wrapper')}>
+                                <img src={imgThongTinVe} alt="Thông tin vé" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className={cx('news-recruitment-section')}>
+                <div className={cx('container', 'split-container')}>
+                    <div className={cx('metro-news')}>
+                        <div className={cx('metro-header')}>
+                            <h2 className={cx('metro-title')}>TIN TỨC</h2>
+                        </div>
+
+                        <div className={cx('metro-list')}>
+                            {newsList.length > 0 ? newsList.slice(0, 4).map((news) => (
+                                <div key={news.id} className={cx('metro-list-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                    {news.imageUrl && (
+                                        <div className={cx('metro-list-thumb')}>
+                                            <img src={normalizeMediaUrl(news.imageUrl)} alt={news.title} />
+                                        </div>
+                                    )}
+                                    <div className={cx('metro-list-info')}>
+                                        <h3 className={cx('metro-list-title-text')}>{news.title.toUpperCase()}</h3>
+                                        <p className={cx('metro-list-summary')}>{news.summary}</p>
+                                    </div>
+                                    <div className={cx('metro-list-action')}>
+                                        <svg className={cx('chevron')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            )) : (
+                                <p style={{ color: '#999', fontSize: '15px' }}>Chưa có tin tức mới.</p>
+                            )}
+                        </div>
+
+                        {newsList.length > 0 && (
+                            <div className={cx('metro-footer')}>
+                                <span className={cx('view-all-link')} onClick={() => navigate('/news')}>
+                                    Xem thêm...
+                                </span>
+                            </div>
+                        )}
                     </div>
 
-                    <div className={cx('news-grid')}>
-                        {newsList.length > 0 ? newsList.slice(0, 6).map((news) => (
-                            <div key={news.id} className={cx('news-card')} onClick={() => navigate(`/news/${news.id}`)}>
-                                {news.imageUrl && (
-                                    <div className={cx('news-thumb')}>
-                                        <img src={normalizeMediaUrl(news.imageUrl)} alt={news.title} />
-                                    </div>
-                                )}
-                                <div className={cx('news-info')}>
-                                    <span className={cx('news-date')}>{new Date(news.createdAt).toLocaleDateString('vi-VN')}</span>
-                                    <h3 className={cx('news-title')}>{news.title}</h3>
-                                    <div className={cx('news-summary')}>{news.summary}</div>
-                                </div>
-                            </div>
-                        )) : (
-                            <p style={{ color: '#999', fontSize: '15px' }}>Chưa có thông báo mới.</p>
-                        )}
+                    <div className={cx('metro-recruitment')}>
+                        <div className={cx('metro-header')}>
+                            <h2 className={cx('metro-title')}>TUYỂN DỤNG</h2>
+                        </div>
+                        <div className={cx('recruitment-content')}>
+                            <p className={cx('empty-recruitment')}>Không có tin tuyển dụng nào</p>
+                        </div>
                     </div>
                 </div>
             </section>
