@@ -85,8 +85,12 @@ function Home() {
 
                 <div className={cx('hero-overlay')}>
                     <div className={cx('new-year-badge')}>
-                        <span className={cx('badge-text')}>CHÚC MỪNG NĂM MỚI</span>
-                        <span className={cx('badge-year')}>2026</span>
+                        <span className={cx('badge-text')}>
+
+                        </span>
+                        <span className={cx('badge-year')}>
+
+                        </span>
                     </div>
 
                     <div className={cx('circular-nav')}>
@@ -108,39 +112,31 @@ function Home() {
             </section>
 
             <section className={cx('metro-announcement')}>
-                <div className={cx('container')}>
+                <div className={cx('container', 'announcement-container')}>
+                    <h2 className={cx('announcement-title')}>THÔNG BÁO</h2>
                     <div className={cx('announcement-wrapper')}>
-                        <div className={cx('announcement-title-zone')}>
-                            <h2 className={cx('announcement-title')}>THÔNG BÁO</h2>
-                            <svg className={cx('announce-icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
-                                <circle cx="12" cy="12" r="3" fill="currentColor" />
-                            </svg>
+                        <div className={cx('announcement-col')}>
+                            {newsList.slice(0, 3).map((news) => (
+                                <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                    <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
+                                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                    </svg>
+                                    <span className={cx('text')}>{news.title.toUpperCase()}</span>
+                                </div>
+                            ))}
                         </div>
                         <div className={cx('divider-vertical')}></div>
-                        <div className={cx('announcement-content')}>
-                            <div className={cx('announcement-col')}>
-                                {newsList.slice(0, 3).map((news) => (
-                                    <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
-                                        <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
-                                            <circle cx="12" cy="12" r="3" fill="currentColor" />
-                                        </svg>
-                                        <span className={cx('text')}>{news.title.toUpperCase()}</span>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className={cx('announcement-col')}>
-                                {newsList.slice(3, 6).map((news) => (
-                                    <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
-                                        <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
-                                            <circle cx="12" cy="12" r="3" fill="currentColor" />
-                                        </svg>
-                                        <span className={cx('text')}>{news.title.toUpperCase()}</span>
-                                    </div>
-                                ))}
-                            </div>
+                        <div className={cx('announcement-col')}>
+                            {newsList.slice(3, 6).map((news) => (
+                                <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                    <svg className={cx('icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
+                                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                                    </svg>
+                                    <span className={cx('text')}>{news.title.toUpperCase()}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

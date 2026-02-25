@@ -39,6 +39,7 @@
 .new-year-badge {
     text-align: center;
     margin-bottom: 80px;
+    min-height: 185px;
 
     .badge-text {
         display: block;
@@ -149,85 +150,49 @@
 .metro-announcement {
     background-color: #3b1254;
     background-image:
-        radial-gradient(ellipse at 10% 50%, rgba(120, 40, 180, 0.5) 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 50%, rgba(80, 10, 120, 0.4) 0%, transparent 60%);
-    padding: 20px 0;
+        radial-gradient(circle at center, rgba(80, 20, 110, 0.4) 0%, transparent 60%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 15px);
+    padding: 30px 0 40px;
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    overflow: hidden;
-
-    /* Faint decorative blob top-left */
-    &::before {
-        content: '';
-        position: absolute;
-        top: -40px;
-        left: -40px;
-        width: 220px;
-        height: 220px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-        pointer-events: none;
-    }
 }
 
-.announcement-wrapper {
+.announcement-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 30px;
 }
 
 .announcement-title {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: bold;
     margin: 0;
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 1px;
-    white-space: nowrap;
-    flex-shrink: 0;
 }
 
-.announcement-title-zone {
+.announcement-wrapper {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.announcement-title-zone {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.announce-icon {
-    width: 20px;
-    height: 20px;
-    color: #fff;
-    flex-shrink: 0;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .divider-vertical {
     width: 1px;
-    min-height: 100px;
-    background-color: rgba(255, 255, 255, 0.4);
-    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 0 40px;
     align-self: stretch;
-}
-
-.announcement-content {
-    display: flex;
-    flex: 1;
-    align-items: flex-start;
-    gap: 0;
 }
 
 .announcement-col {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 28px;
+    /* Increased gap between items */
     padding: 0 40px 0 0;
 
     &:last-child {
@@ -247,13 +212,16 @@
         height: 14px;
         color: #fff;
         flex-shrink: 0;
-        margin-top: 3px;
+        margin-top: 5px;
+        /* Aligned with larger text */
     }
 
     .text {
-        font-size: 13px;
+        font-size: 15px;
+        /* Increased font size */
         color: #fff;
-        line-height: 1.5;
+        line-height: 1.6;
+        /* Increased line-height */
         font-weight: 400;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -659,6 +627,10 @@
 }
 
 @media (max-width: 1024px) {
+    .new-year-badge {
+        min-height: 140px;
+    }
+
     .new-year-badge .badge-text {
         font-size: 48px;
     }
@@ -672,14 +644,16 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+}
 
-    .announcement-content {
+@media (max-width: 768px) {
+    .announcement-wrapper {
         flex-direction: column;
-        gap: 20px;
+        align-items: stretch;
     }
 
     .announcement-col {
-        padding: 0;
+        padding: 0 !important;
     }
 
     .divider-vertical {
@@ -689,18 +663,13 @@
         margin: 20px 0;
     }
 
-    .split-container {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
     .hero-viewport {
         height: 70vh;
     }
 
     .new-year-badge {
         margin-bottom: 40px;
+        min-height: 120px;
     }
 
     .icon-circle {
