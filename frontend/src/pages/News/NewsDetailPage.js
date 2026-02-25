@@ -50,7 +50,7 @@ function NewsDetailPage() {
 
                 <div
                     className={cx('news-content')}
-                    dangerouslySetInnerHTML={{ __html: news.content }}
+                    dangerouslySetInnerHTML={{ __html: news.content.replace(/&nbsp;|\u00A0/g, ' ') }}
                 />
             </article>
         </div>

@@ -34,9 +34,7 @@ const LINE_3_STATIONS = [
     { id: '12', name: 'Ga Hà Nội', isUnderground: true },
 ];
 
-function MetroLineMap() {
-    const [activeTab, setActiveTab] = useState('2A');
-
+function MetroLineMap({ activeTab }) {
     const renderMap = (stations, color, lineName) => (
         <div className={cx('map-view')}>
             <div className={cx('line-header')}>
@@ -87,32 +85,6 @@ function MetroLineMap() {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('tabs')}>
-                <button
-                    className={cx('tab-item', { active: activeTab === '2A' })}
-                    onClick={() => setActiveTab('2A')}
-                >
-                    <div className={cx('tab-icon', 'icon-2a')}>C</div>
-                    <div className={cx('tab-text')}>Tuyến 2A</div>
-                </button>
-                <div className={cx('tab-divider')} />
-                <button
-                    className={cx('tab-item', { active: activeTab === '3' })}
-                    onClick={() => setActiveTab('3')}
-                >
-                    <div className={cx('tab-icon', 'icon-3')}>V</div>
-                    <div className={cx('tab-text')}>Tuyến 3</div>
-                </button>
-                <div className={cx('tab-divider')} />
-                <button
-                    className={cx('tab-item', { active: activeTab === 'MAP_14' })}
-                    onClick={() => setActiveTab('MAP_14')}
-                >
-                    <div className={cx('tab-icon', 'icon-map')}>M</div>
-                    <div className={cx('tab-text')}>Bản đồ 14 tuyến</div>
-                </button>
-            </div>
-
             <div className={cx('content')}>
                 {activeTab === '2A' ? renderMap(LINE_2A_STATIONS, '#bece0a', '2A: Cát Linh - Hà Đông') : null}
                 {activeTab === '3' ? renderMap(LINE_3_STATIONS, '#8e3834', '3: Nhổn - Ga Hà Nội') : null}

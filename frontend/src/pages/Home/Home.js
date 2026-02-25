@@ -27,14 +27,20 @@ function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [banners, setBanners] = useState([]);
     const [newsList, setNewsList] = useState([]);
+    const [activeMapTab, setActiveMapTab] = useState('2A');
     const defaultSlides = [heroImage, metroTrainImg];
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const bannerData = await getActiveBanners();
-                const newsData = await getActiveNews();
+                let newsData = await getActiveNews();
                 setBanners(bannerData || []);
+
+                if (!newsData || newsData.length === 0) {
+                    newsData = [];
+                }
+
                 setNewsList(newsData || []);
             } catch (error) {
                 console.error('Failed to fetch home data', error);
@@ -104,7 +110,14 @@ function Home() {
             <section className={cx('metro-announcement')}>
                 <div className={cx('container')}>
                     <div className={cx('announcement-wrapper')}>
-                        <h2 className={cx('announcement-title')}>THÔNG BÁO</h2>
+                        <div className={cx('announcement-title-zone')}>
+                            <h2 className={cx('announcement-title')}>THÔNG BÁO</h2>
+                            <svg className={cx('announce-icon')} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2.5" />
+                                <circle cx="12" cy="12" r="3" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div className={cx('divider-vertical')}></div>
                         <div className={cx('announcement-content')}>
                             <div className={cx('announcement-col')}>
                                 {newsList.slice(0, 3).map((news) => (
@@ -117,7 +130,6 @@ function Home() {
                                     </div>
                                 ))}
                             </div>
-                            <div className={cx('divider-vertical')}></div>
                             <div className={cx('announcement-col')}>
                                 {newsList.slice(3, 6).map((news) => (
                                     <div key={news.id} className={cx('announcement-item')} onClick={() => navigate(`/news/${news.id}`)}>
@@ -134,7 +146,36 @@ function Home() {
                 </div>
             </section>
 
-            <MetroLineMap />
+            <div className={cx('metro-map-section')}>
+                <div className={cx('map-tabs-container')}>
+                    <div className={cx('tabs')}>
+                        <button
+                            className={cx('tab-item', { active: activeMapTab === '2A' })}
+                            onClick={() => setActiveMapTab('2A')}
+                        >
+                            <div className={cx('tab-icon', 'icon-2a')}>C</div>
+                            <div className={cx('tab-text')}>Tuyến 2A</div>
+                        </button>
+                        <div className={cx('tab-divider')} />
+                        <button
+                            className={cx('tab-item', { active: activeMapTab === '3' })}
+                            onClick={() => setActiveMapTab('3')}
+                        >
+                            <div className={cx('tab-icon', 'icon-3')}>V</div>
+                            <div className={cx('tab-text')}>Tuyến 3</div>
+                        </button>
+                        <div className={cx('tab-divider')} />
+                        <button
+                            className={cx('tab-item', { active: activeMapTab === 'MAP_14' })}
+                            onClick={() => setActiveMapTab('MAP_14')}
+                        >
+                            <div className={cx('tab-icon', 'icon-map')}>M</div>
+                            <div className={cx('tab-text')}>Bản đồ 14 tuyến</div>
+                        </button>
+                    </div>
+                </div>
+                <MetroLineMap activeTab={activeMapTab} />
+            </div>
 
             <section className={cx('huong-dan-section')}>
                 <div className={cx('container', 'huong-dan-container')}>
@@ -198,13 +239,28 @@ function Home() {
                         )}
                     </div>
 
-                    <div className={cx('metro-recruitment')}>
+                    <div className={cx('metro-announcement-list')}>
                         <div className={cx('metro-header')}>
-                            <h2 className={cx('metro-title')}>TUYỂN DỤNG</h2>
+                            <h2 className={cx('metro-title')}>THÔNG BÁO</h2>
                         </div>
-                        <div className={cx('recruitment-content')}>
-                            <p className={cx('empty-recruitment')}>Không có tin tuyển dụng nào</p>
+                        <div className={cx('announcement-title-list')}>
+                            {newsList.length > 0 ? newsList.slice(0, 8).map((news) => (
+                                <div key={news.id} className={cx('announcement-title-item')} onClick={() => navigate(`/news/${news.id}`)}>
+                                    <svg className={cx('announce-bullet')} width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="8" stroke="#1F61A9" strokeWidth="3" />
+                                        <circle cx="12" cy="12" r="3" fill="#1F61A9" />
+                                    </svg>
+                                    <span className={cx('announce-title')}>{news.title}</span>
+                                </div>
+                            )) : (
+                                <p style={{ color: '#999', fontSize: '14px' }}>Chưa có thông báo mới.</p>
+                            )}
                         </div>
+                        {newsList.length > 0 && (
+                            <div className={cx('metro-footer')}>
+                                <span className={cx('view-all-link')} onClick={() => navigate('/news')}>Xem thêm...</span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
