@@ -153,6 +153,31 @@
     }
 }
 
+.search-input {
+    width: 200px;
+    height: 44px;
+    padding: 0 15px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+/* Sticky state handling for search input placeholder text */
+.sticky .search-input {
+    color: #333;
+
+    &::placeholder {
+        color: #999;
+    }
+}
+
 @media (max-width: 992px) {
     .slogan {
         .slogan-line {

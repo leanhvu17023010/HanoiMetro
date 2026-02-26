@@ -47,6 +47,10 @@ function Home() {
             }
         };
         fetchData();
+
+        // Listen for token updates (e.g. login, logout, auto-logout on 401)
+        window.addEventListener('tokenUpdated', fetchData);
+        return () => window.removeEventListener('tokenUpdated', fetchData);
     }, []);
 
     const slides = banners.length > 0 ? banners.map(b => normalizeMediaUrl(b.imageUrl)) : defaultSlides;

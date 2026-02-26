@@ -34,6 +34,33 @@ function DefaultHeader() {
         }
     };
 
+    const [showSearch, setShowSearch] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+            const query = searchQuery.trim().toLowerCase();
+            if (query) {
+                if (query.includes('hướng dẫn') || query.includes('sử dụng') || query.includes('cách')) {
+                    navigate('/metro-userguide');
+                } else if (query.includes('vé') || query.includes('giá') || query.includes('ticket')) {
+                    navigate('/afc-tickets');
+                } else if (query.includes('bản đồ') || query.includes('map') || query.includes('tuyến')) {
+                    navigate('/map');
+                } else if (query.includes('hỗ trợ') || query.includes('liên hệ') || query.includes('support')) {
+                    navigate('/support');
+                } else if (query.includes('tin') || query.includes('thông báo') || query.includes('news')) {
+                    navigate('/news');
+                } else {
+                    // Mặc định chuyển đến trang tin tức nếu không khớp khóa nào
+                    navigate(`/news?search=${encodeURIComponent(searchQuery)}`);
+                }
+                setShowSearch(false);
+                setSearchQuery('');
+            }
+        }
+    };
+
     return (
         <header className={cx('wrapper', { sticky: isSticky })}>
             <div className={cx('container')}>
@@ -49,11 +76,20 @@ function DefaultHeader() {
 
                 <div className={cx('header-right')}>
                     <div className={cx('navbar-actions')}>
-                        <div className={cx('action-box', 'search-box')}>
+                        {showSearch && (
+                            <input
+                                type="text"
+                                className={cx('search-input')}
+                                placeholder="Tìm kiếm..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyDown={handleSearch}
+                                autoFocus
+                                onBlur={() => setTimeout(() => setShowSearch(false), 200)}
+                            />
+                        )}
+                        <div className={cx('action-box', 'search-box')} onClick={() => setShowSearch(!showSearch)}>
                             <span className={cx('icon')}>🔍</span>
-                        </div>
-                        <div className={cx('action-box')}>
-                            <span className={cx('icon')}>🌐</span>
                         </div>
                         <div className={cx('action-box')} onClick={handleAuthAction} title={token ? 'Đăng xuất' : 'Đăng nhập'}>
                             <span className={cx('icon')}>{token ? '🔓' : '👤'}</span>
